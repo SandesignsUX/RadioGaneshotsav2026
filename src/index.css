@@ -1,0 +1,52 @@
+:root {
+  --primary: #f97316; /* Saffron Orange */
+  --primary-dark: #ea580c;
+  --primary-glow: rgba(249, 115, 22, 0.45);
+  --gold: #fbbf24;
+  --gold-glow: rgba(251, 191, 36, 0.4);
+  --bg-color: #0d0703;
+  --text: #fef08a; /* Warm Yellow/Gold text */
+  --text-light: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.65);
+
+  /* Typography */
+  --font-brand: 'Cinzel', Georgia, serif;
+  --font-marathi-display: 'Yatra One', 'Rozha One', cursive, serif;
+  --font-marathi-body: 'Gotu', 'Outfit', sans-serif;
+  --font-ui: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-ui);
+  background-color: var(--bg-color);
+  color: var(--text-light);
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, .brand-title {
+  font-family: var(--font-brand);
+  letter-spacing: 0.5px;
+}
+
+.marathi-title,
+.entry-playlist-hindi,
+.track-title,
+.rotation-name {
+  font-family: var(--font-marathi-display);
+}
+
+#root {
+  height: 100%;
+  width: 100%;
+}
+

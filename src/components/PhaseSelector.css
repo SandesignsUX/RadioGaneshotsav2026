@@ -1,0 +1,162 @@
+/* ---- Phase Selector Container ---- */
+.phase-selector-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 30;
+}
+
+.phase-tabs-glass {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(18, 10, 4, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(249, 115, 22, 0.3);
+  padding: 0.35rem;
+  border-radius: 40px;
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* ---- Individual Tab ---- */
+.phase-tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: transparent;
+  border: 1px solid transparent;
+  padding: 0.45rem 1.1rem;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  color: rgba(255, 255, 255, 0.7);
+  outline: none;
+  position: relative;
+  min-width: 105px;
+}
+
+.phase-tab:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.phase-tab.selected {
+  background: linear-gradient(135deg, rgba(249, 115, 22, 0.35) 0%, rgba(234, 88, 12, 0.2) 100%);
+  border-color: var(--primary);
+  color: #fff;
+  box-shadow: 0 2px 14px rgba(249, 115, 22, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transform: scale(1.02);
+}
+
+.phase-tab-content {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.phase-tab-emoji {
+  font-size: 1.15rem;
+}
+
+.phase-tab-text {
+  display: flex;
+  align-items: baseline;
+  gap: 0.3rem;
+}
+
+.phase-tab-hindi {
+  font-family: var(--font-marathi-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #fff;
+}
+
+.phase-tab.selected .phase-tab-hindi {
+  color: #fef08a;
+  text-shadow: 0 0 10px rgba(254, 240, 138, 0.4);
+}
+
+.phase-tab-english {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.phase-tab.selected .phase-tab-english {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.phase-tab-dates {
+  font-size: 0.64rem;
+  color: rgba(255, 255, 255, 0.4);
+  margin-top: 0.1rem;
+  font-weight: 500;
+}
+
+.phase-tab.selected .phase-tab-dates {
+  color: #fdba74;
+}
+
+/* Live Active Schedule Dot */
+.phase-live-indicator {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 8px;
+  height: 8px;
+  margin-left: 0.1rem;
+}
+
+.phase-live-pulse {
+  width: 6px;
+  height: 6px;
+  background: #22c55e;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #22c55e;
+  animation: livePulse 1.8s infinite;
+}
+
+@keyframes livePulse {
+  0% {
+    transform: scale(0.9);
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+  }
+  70% {
+    transform: scale(1.1);
+    box-shadow: 0 0 0 6px rgba(34, 197, 94, 0);
+  }
+  100% {
+    transform: scale(0.9);
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+  }
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 680px) {
+  .phase-tabs-glass {
+    gap: 0.2rem;
+    padding: 0.25rem;
+  }
+
+  .phase-tab {
+    padding: 0.35rem 0.6rem;
+    min-width: 80px;
+  }
+
+  .phase-tab-dates {
+    display: none; /* Hide date text on narrow screens to keep top UI super clean */
+  }
+
+  .phase-tab-hindi {
+    font-size: 0.92rem;
+  }
+
+  .phase-tab-english {
+    font-size: 0.65rem;
+  }
+}

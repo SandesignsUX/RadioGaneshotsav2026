@@ -1,0 +1,77 @@
+.loading-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+.loading-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.flower-mandala {
+  width: 80px;
+  height: 80px;
+  border: 4px solid rgba(249, 115, 22, 0.1);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+  margin-bottom: 2rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-content h2 {
+  color: var(--primary);
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  font-weight: 800;
+  text-shadow: 0 0 20px rgba(249, 115, 22, 0.3);
+}
+
+.loading-content p {
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 2.5rem;
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+}
+
+.progress-bar {
+  width: 240px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  overflow: hidden;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.5);
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary-dark), var(--primary));
+  width: 0%;
+  animation: fillProgress 2.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  border-radius: 3px;
+  box-shadow: 0 0 10px rgba(249, 115, 22, 0.5);
+}
+
+@keyframes fillProgress {
+  0% { width: 0%; }
+  30% { width: 40%; }
+  60% { width: 60%; }
+  80% { width: 90%; }
+  100% { width: 100%; }
+}
