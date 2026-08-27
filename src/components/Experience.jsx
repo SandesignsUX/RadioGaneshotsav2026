@@ -120,6 +120,7 @@ export default function Experience({
             dholAudio={dholAudio}
             onMinimize={onMinimize}
             onOpenDrawer={() => setIsDrawerOpen(true)}
+            onSelectTrack={onSelectTrack}
           />
         )
       }
