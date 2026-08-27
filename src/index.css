@@ -9,11 +9,15 @@
   --text-light: #ffffff;
   --text-muted: rgba(255, 255, 255, 0.65);
 
-  /* Typography */
-  --font-brand: 'Cinzel', Georgia, serif;
-  --font-marathi-display: 'Yatra One', 'Rozha One', cursive, serif;
-  --font-marathi-body: 'Gotu', 'Outfit', sans-serif;
-  --font-ui: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  /* Soft, Elegant Headings & Titles */
+  --font-brand: 'Marcellus', 'Cormorant Garamond', Georgia, serif;
+  --font-heading: 'Cormorant Garamond', 'Marcellus', Georgia, serif;
+  --font-marathi-display: 'Noto Serif Devanagari', 'Mukta', serif;
+  --font-marathi-body: 'Mukta', 'Noto Sans Devanagari', sans-serif;
+
+  /* Simple, Clean, Web-Readable Body & UI */
+  --font-ui: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-body: 'Plus Jakarta Sans', 'Mukta', sans-serif;
 }
 
 * {
@@ -35,7 +39,8 @@ body {
 
 h1, h2, .brand-title {
   font-family: var(--font-brand);
-  letter-spacing: 0.5px;
+  letter-spacing: 0.8px;
+  font-weight: 600;
 }
 
 .marathi-title,
@@ -43,6 +48,7 @@ h1, h2, .brand-title {
 .track-title,
 .rotation-name {
   font-family: var(--font-marathi-display);
+  letter-spacing: 0.2px;
 }
 
 #root {

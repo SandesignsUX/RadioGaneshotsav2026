@@ -67,9 +67,9 @@
 
 .phase-tab-hindi {
   font-family: var(--font-marathi-display);
-  font-size: 1.05rem;
-  font-weight: 700;
-  letter-spacing: 0.5px;
+  font-size: 1.02rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
   color: #fff;
 }
 
@@ -79,20 +79,22 @@
 }
 
 .phase-tab-english {
+  font-family: var(--font-ui);
   font-size: 0.72rem;
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.55);
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.4px;
 }
 
 .phase-tab.selected .phase-tab-english {
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(255, 255, 255, 0.9);
 }
 
 .phase-tab-dates {
-  font-size: 0.64rem;
-  color: rgba(255, 255, 255, 0.4);
+  font-family: var(--font-ui);
+  font-size: 0.65rem;
+  color: rgba(255, 255, 255, 0.45);
   margin-top: 0.1rem;
   font-weight: 500;
 }

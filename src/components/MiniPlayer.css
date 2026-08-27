@@ -67,18 +67,22 @@
 }
 
 .mini-title {
-  font-size: 0.9rem;
+  font-family: var(--font-marathi-display);
+  font-size: 0.92rem;
   font-weight: 600;
   color: #fff;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  letter-spacing: 0.2px;
 }
 
 .mini-artist {
+  font-family: var(--font-ui);
   font-size: 0.72rem;
-  color: var(--primary);
-  opacity: 0.85;
+  color: #fdba74;
+  opacity: 0.9;
+  font-weight: 500;
 }
 
 .mini-controls {

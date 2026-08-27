@@ -61,8 +61,8 @@
   font-family: var(--font-brand);
   font-size: 1.35rem;
   color: #fff;
-  font-weight: 800;
-  letter-spacing: 1px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
   background: linear-gradient(90deg, #fff, #fdba74);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -72,8 +72,8 @@
   font-family: var(--font-marathi-display);
   font-size: 0.85rem;
   color: var(--primary);
-  font-weight: 600;
-  letter-spacing: 0.5px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
 }
 
 .close-btn {
@@ -107,6 +107,7 @@
 }
 
 .tab-btn {
+  font-family: var(--font-ui);
   flex: 1;
   display: flex;
   align-items: center;
@@ -117,7 +118,7 @@
   padding: 0.55rem 0.75rem;
   color: rgba(255, 255, 255, 0.6);
   font-size: 0.82rem;
-  font-weight: 600;
+  font-weight: 500;
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -134,6 +135,7 @@
   background: rgba(249, 115, 22, 0.2);
   border-color: rgba(249, 115, 22, 0.4);
   box-shadow: 0 2px 10px rgba(249, 115, 22, 0.15);
+  font-weight: 600;
 }
 
 /* ---- Content Area ---- */
@@ -188,16 +190,19 @@
   font-family: var(--font-marathi-display);
   font-size: 1.05rem;
   color: #fff;
-  font-weight: 700;
+  font-weight: 600;
+  letter-spacing: 0.2px;
 }
 
 .queue-playlist-desc {
+  font-family: var(--font-body);
   font-size: 0.78rem;
   color: rgba(255, 255, 255, 0.6);
   margin-top: 0.15rem;
 }
 
 .yt-source-link {
+  font-family: var(--font-ui);
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
@@ -268,8 +273,9 @@
 }
 
 .index-num {
+  font-family: var(--font-ui);
   font-size: 0.85rem;
-  font-weight: 600;
+  font-weight: 500;
   color: rgba(255, 255, 255, 0.4);
 }
 
@@ -315,12 +321,13 @@
 
 .track-item-title {
   font-family: var(--font-marathi-display);
-  font-size: 0.95rem;
-  font-weight: 700;
+  font-size: 0.96rem;
+  font-weight: 600;
   color: #fff;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  letter-spacing: 0.2px;
 }
 
 .track-item.active .track-item-title {
@@ -328,23 +335,27 @@
 }
 
 .track-item-sub {
+  font-family: var(--font-ui);
   display: block;
   font-size: 0.74rem;
   color: rgba(255, 255, 255, 0.5);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  font-weight: 500;
 }
 
 .track-item-artist {
+  font-family: var(--font-ui);
   display: block;
   font-size: 0.72rem;
-  color: var(--primary);
+  color: #fdba74;
   opacity: 0.85;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   margin-top: 0.1rem;
+  font-weight: 500;
 }
 
 .track-item-right {
@@ -353,13 +364,16 @@
 }
 
 .track-duration {
+  font-family: var(--font-ui);
   font-size: 0.74rem;
   color: rgba(255, 255, 255, 0.4);
   font-variant-numeric: tabular-nums;
+  font-weight: 500;
 }
 
 /* ---- TAB 2: Playlists Grid ---- */
 .pane-intro {
+  font-family: var(--font-body);
   font-size: 0.85rem;
   color: rgba(255, 255, 255, 0.7);
   margin-bottom: 1rem;
@@ -405,6 +419,7 @@
 }
 
 .playlist-time {
+  font-family: var(--font-ui);
   font-size: 0.72rem;
   font-weight: 600;
   color: rgba(255, 255, 255, 0.5);
@@ -416,18 +431,22 @@
 .playlist-card-title {
   font-family: var(--font-marathi-display);
   font-size: 1.05rem;
-  font-weight: 700;
+  font-weight: 600;
   color: #fff;
   margin-bottom: 0.15rem;
+  letter-spacing: 0.2px;
 }
 
 .playlist-card-sub {
+  font-family: var(--font-ui);
   font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.55);
   margin-bottom: 0.4rem;
+  font-weight: 500;
 }
 
 .playlist-card-desc {
+  font-family: var(--font-body);
   font-size: 0.8rem;
   color: rgba(255, 255, 255, 0.7);
   line-height: 1.4;
@@ -443,14 +462,17 @@
 }
 
 .tracks-count {
+  font-family: var(--font-ui);
   font-size: 0.75rem;
   color: rgba(255, 255, 255, 0.5);
   display: flex;
   align-items: center;
   gap: 0.35rem;
+  font-weight: 500;
 }
 
 .now-active-pill {
+  font-family: var(--font-ui);
   background: var(--primary);
   color: #fff;
   font-size: 0.7rem;
@@ -462,6 +484,7 @@
 }
 
 .select-pl-btn {
+  font-family: var(--font-ui);
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.15);
   color: #fff;
@@ -488,9 +511,10 @@
 }
 
 .coming-soon-badge {
+  font-family: var(--font-ui);
   display: inline-block;
   font-size: 0.68rem;
-  font-weight: 700;
+  font-weight: 600;
   color: #fdba74;
   background: rgba(249, 115, 22, 0.15);
   padding: 0.15rem 0.5rem;
@@ -500,21 +524,24 @@
 
 .coming-soon-title {
   font-family: var(--font-brand);
-  font-size: 0.95rem;
+  font-size: 0.98rem;
   color: rgba(255, 255, 255, 0.9);
-  font-weight: 700;
+  font-weight: 600;
+  letter-spacing: 0.4px;
   margin-bottom: 0.15rem;
 }
 
 .coming-soon-sub {
-  font-family: var(--font-marathi-display);
+  font-family: var(--font-marathi-body);
   font-size: 0.8rem;
   color: #fef08a;
-  opacity: 0.8;
+  opacity: 0.85;
   margin-bottom: 0.35rem;
+  font-weight: 500;
 }
 
 .coming-soon-desc {
+  font-family: var(--font-body);
   font-size: 0.78rem;
   color: rgba(255, 255, 255, 0.5);
   line-height: 1.4;
@@ -536,16 +563,18 @@
 
 .about-hero h3 {
   font-family: var(--font-brand);
-  font-size: 1.25rem;
+  font-size: 1.3rem;
   color: #fff;
-  font-weight: 800;
+  font-weight: 600;
+  letter-spacing: 0.6px;
 }
 
 .about-tagline {
-  font-family: var(--font-marathi-display);
+  font-family: var(--font-marathi-body);
   font-size: 0.9rem;
   color: #fef08a;
   margin-top: 0.3rem;
+  font-weight: 500;
 }
 
 .about-section {
@@ -557,13 +586,15 @@
 }
 
 .about-section h4 {
+  font-family: var(--font-ui);
   font-size: 0.95rem;
   color: #fdba74;
-  font-weight: 700;
+  font-weight: 600;
   margin-bottom: 0.5rem;
 }
 
 .about-section p {
+  font-family: var(--font-body);
   font-size: 0.82rem;
   color: rgba(255, 255, 255, 0.75);
   line-height: 1.5;
@@ -598,9 +629,11 @@
   font-family: var(--font-marathi-display);
   font-size: 0.92rem;
   color: #fff;
+  font-weight: 600;
 }
 
 .about-phase-dates {
+  font-family: var(--font-ui);
   font-size: 0.68rem;
   color: var(--primary);
   margin-left: auto;
@@ -608,6 +641,7 @@
 }
 
 .about-phase-desc {
+  font-family: var(--font-body);
   font-size: 0.76rem !important;
   color: rgba(255, 255, 255, 0.6) !important;
 }
@@ -622,6 +656,7 @@
 }
 
 .about-dhol-list li {
+  font-family: var(--font-body);
   font-size: 0.8rem;
   color: rgba(255, 255, 255, 0.8);
   padding-left: 0.5rem;
@@ -629,6 +664,7 @@
 }
 
 .about-link-btn {
+  font-family: var(--font-ui);
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
@@ -670,13 +706,15 @@
 
 .share-pane h3 {
   font-family: var(--font-brand);
-  font-size: 1.25rem;
+  font-size: 1.3rem;
   color: #fff;
-  font-weight: 800;
+  font-weight: 600;
+  letter-spacing: 0.6px;
   margin-bottom: 0.4rem;
 }
 
 .share-pane p {
+  font-family: var(--font-body);
   font-size: 0.85rem;
   color: rgba(255, 255, 255, 0.7);
   max-width: 300px;
@@ -692,6 +730,7 @@
 }
 
 .share-btn {
+  font-family: var(--font-ui);
   width: 100%;
   display: flex;
   align-items: center;
@@ -700,7 +739,7 @@
   padding: 0.85rem;
   border-radius: 10px;
   font-size: 0.92rem;
-  font-weight: 700;
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   border: none;
@@ -743,24 +782,28 @@
 }
 
 .preview-label {
+  font-family: var(--font-ui);
   font-size: 0.68rem;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   color: var(--primary);
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .preview-track {
   font-family: var(--font-marathi-display);
   font-size: 0.95rem;
-  font-weight: 700;
+  font-weight: 600;
   color: #fff;
   margin: 0.2rem 0;
+  letter-spacing: 0.2px;
 }
 
 .preview-artist {
+  font-family: var(--font-ui);
   font-size: 0.78rem;
   color: rgba(255, 255, 255, 0.5);
+  font-weight: 500;
 }
 
 /* ---- Drawer Footer ---- */
@@ -774,16 +817,17 @@
 .drawer-footer p {
   font-family: var(--font-brand);
   color: rgba(255, 255, 255, 0.95);
-  font-weight: 800;
+  font-weight: 600;
   font-size: 0.95rem;
   margin-bottom: 0.2rem;
+  letter-spacing: 0.4px;
 }
 
 .drawer-footer .credit {
-  font-family: var(--font-marathi-display);
+  font-family: var(--font-marathi-body);
   font-size: 0.8rem;
   color: #fef08a;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 /* ---- Responsive ---- */

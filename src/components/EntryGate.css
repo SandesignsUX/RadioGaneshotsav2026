@@ -157,12 +157,11 @@
 
 .entry-title {
   font-family: var(--font-brand);
-  font-size: 1.65rem;
-  font-weight: 900;
-  letter-spacing: 2.5px;
+  font-size: 1.75rem;
+  font-weight: 600;
+  letter-spacing: 1.2px;
   color: #fff;
-  text-transform: uppercase;
-  line-height: 1.1;
+  line-height: 1.2;
   background: linear-gradient(135deg, #ffffff 0%, #fed7aa 60%, #f97316 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -170,16 +169,17 @@
 
 .entry-subtitle {
   font-family: var(--font-marathi-display);
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   color: #fef08a;
-  font-weight: 700;
-  letter-spacing: 0.5px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
   text-shadow: 0 0 10px rgba(254, 240, 138, 0.3);
 }
 
 .entry-phase-tag {
+  font-family: var(--font-ui);
   font-size: 0.76rem;
-  font-weight: 600;
+  font-weight: 500;
   color: #fdba74;
   background: rgba(249, 115, 22, 0.15);
   border: 1px solid rgba(249, 115, 22, 0.3);
@@ -202,11 +202,12 @@
 }
 
 .entry-now-label {
+  font-family: var(--font-ui);
   font-size: 0.68rem;
   text-transform: uppercase;
   letter-spacing: 1.5px;
   color: rgba(255,255,255,0.5);
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .entry-playlist-name {
@@ -222,21 +223,24 @@
 .entry-playlist-hindi {
   font-family: var(--font-marathi-display);
   font-size: 1.2rem;
-  font-weight: 700;
+  font-weight: 600;
   color: #fff;
+  letter-spacing: 0.3px;
 }
 
 .entry-playlist-desc {
-  font-size: 0.8rem;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
   color: rgba(255,255,255,0.7);
   max-width: 320px;
-  line-height: 1.4;
+  line-height: 1.45;
 }
 
 .entry-time-range {
+  font-family: var(--font-ui);
   font-size: 0.72rem;
   color: var(--primary);
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: 0.3px;
 }
 
@@ -267,19 +271,19 @@
 }
 
 .entry-btn-main {
-  font-family: var(--font-brand);
-  font-size: 1.05rem;
-  font-weight: 800;
+  font-family: var(--font-ui);
+  font-size: 0.98rem;
+  font-weight: 700;
   color: #fff;
-  letter-spacing: 1px;
+  letter-spacing: 0.6px;
   text-transform: uppercase;
 }
 
 .entry-btn-sub {
-  font-family: var(--font-marathi-display);
-  font-size: 0.75rem;
+  font-family: var(--font-marathi-body);
+  font-size: 0.78rem;
   color: #fef08a;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.3px;
 }
 
 .entry-hint {
