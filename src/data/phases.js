@@ -1,78 +1,58 @@
 /**
- * Ganeshotsav 2026 Festival Phases
+ * Ganeshotsav 2026 Categories (Categorized by Song Type & Language)
  */
-export const FESTIVAL_PHASES = [
+export const FESTIVAL_CATEGORIES = [
   {
-    id: 'aagman',
-    name: 'Aagman',
-    nameHindi: 'आगमन',
-    subtitle: 'Welcoming Lord Ganesha',
-    subtitleHindi: 'बाप्पाचे आगमन व स्वागत',
-    description: 'Feel the electric excitement of Bappa arriving home and in pandals with loud Dhol Tasha beats.',
-    activeRangeText: 'Till 15 Sept 2026, 12:00 AM',
-    startDate: new Date('2026-08-01T00:00:00+05:30'),
-    endDate: new Date('2026-09-15T00:00:00+05:30'),
+    id: 'marathi',
+    name: 'Marathi Songs',
+    subtitle: 'Iconic Marathi Devotional & Utsav Songs',
+    description: 'Soulful and energetic Marathi devotional tracks, Dhol Tasha anthems, and timeless Bappa geet.',
     bgImage: '/Aagman Background.png',
-    emoji: '🌺',
-    badge: 'Aagman Special',
-    tagline: 'मोरया रे बाप्पा मोरया रे'
+    emoji: '🚩',
+    badge: 'Marathi Special'
   },
   {
-    id: 'utsav',
-    name: 'Utsav',
-    nameHindi: 'उत्सव',
-    subtitle: 'Daily Festivities & Pandal Darshan',
-    subtitleHindi: 'महापूजा, नित्य आरती व भजन',
-    description: 'The golden days of celebration, daily Maha Aarti, fragrant marigold flowers, and divine darshan.',
-    activeRangeText: '14 Sept – 25 Sept 2026',
-    startDate: new Date('2026-09-14T00:00:00+05:30'),
-    endDate: new Date('2026-09-25T23:59:59+05:30'),
+    id: 'hindi',
+    name: 'Hindi Songs',
+    subtitle: 'Devotional Hindi Bhajans & Celebrations',
+    description: 'Melodious Hindi Ganeshotsav bhajans, popular festival anthems, and divine offerings.',
+    bgImage: '/Aagman Background.png',
+    emoji: '🪷',
+    badge: 'Hindi Bhajans'
+  },
+  {
+    id: 'aarti',
+    name: 'Ganpati Aarti',
+    subtitle: 'Traditional Aartis & Stutis',
+    description: 'Divine morning and evening Aartis, Sukh Karta Dukh Harta, Shej Aarti, and sacred chants.',
     bgImage: '/Aagman Background.png',
     emoji: '🪔',
-    badge: 'Pandal Darshan',
-    tagline: 'सुखकर्ता दुखहर्ता वार्ता विघ्नाची'
+    badge: 'Maha Aarti'
   },
   {
-    id: 'visarjan',
-    name: 'Visarjan',
-    nameHindi: 'विसर्जन',
-    subtitle: 'The Grand Farewell Procession',
-    subtitleHindi: 'भव्य विसर्जन मिरवणूक व निरोप',
-    description: 'Bittersweet joy at Girgaon Chowpatty and ocean shores. Dancing with gulal to bring Bappa back next year.',
-    activeRangeText: '15 Sept – 25 Sept 2026',
-    startDate: new Date('2026-09-15T00:00:00+05:30'),
-    endDate: new Date('2026-09-25T23:59:59+05:30'),
+    id: 'dj',
+    name: 'Ganeshotsav DJ Songs',
+    subtitle: 'High-Energy DJ Remixes & Procession Beats',
+    description: 'Electrifying DJ beats, high-energy festival dance mixes, and thunderous procession bass.',
     bgImage: '/Aagman Background.png',
-    emoji: '🌊',
-    badge: 'Mirvanook',
-    tagline: 'पुढच्या वर्षी लवकर या!'
+    emoji: '🎧',
+    badge: 'DJ Remixes'
   }
 ]
 
+// Backward-compatibility alias for any component importing FESTIVAL_PHASES
+export const FESTIVAL_PHASES = FESTIVAL_CATEGORIES
+
 /**
- * Checks if a phase is currently active according to Indian Standard Time (IST)
+ * Returns default initial category
  */
-export function isPhaseActive(phase, testDate = null) {
-  const now = testDate || new Date()
-  if (phase.id === 'aagman') {
-    return now <= phase.endDate
-  }
-  return now >= phase.startDate && now <= phase.endDate
+export function getDefaultPhase() {
+  return FESTIVAL_CATEGORIES[0]
 }
 
 /**
- * Returns default initial phase based on current time
+ * Kept for interface compatibility
  */
-export function getDefaultPhase(testDate = null) {
-  const now = testDate || new Date()
-  if (now <= FESTIVAL_PHASES[0].endDate) {
-    return FESTIVAL_PHASES[0] // Aagman
-  }
-  if (now >= FESTIVAL_PHASES[1].startDate && now <= FESTIVAL_PHASES[1].endDate) {
-    return FESTIVAL_PHASES[1] // Utsav
-  }
-  if (now >= FESTIVAL_PHASES[2].startDate && now <= FESTIVAL_PHASES[2].endDate) {
-    return FESTIVAL_PHASES[2] // Visarjan
-  }
-  return FESTIVAL_PHASES[0]
+export function isPhaseActive() {
+  return false
 }

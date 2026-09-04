@@ -9,15 +9,17 @@
   --text-light: #ffffff;
   --text-muted: rgba(255, 255, 255, 0.65);
 
-  /* Soft, Elegant Headings & Titles */
-  --font-brand: 'Marcellus', 'Cormorant Garamond', Georgia, serif;
-  --font-heading: 'Cormorant Garamond', 'Marcellus', Georgia, serif;
-  --font-marathi-display: 'Noto Serif Devanagari', 'Mukta', serif;
-  --font-marathi-body: 'Mukta', 'Noto Sans Devanagari', sans-serif;
+  /* English Headings & Titles */
+  --font-brand: 'PT Serif', 'Cormorant Garamond', Georgia, serif;
+  --font-heading: 'PT Serif', Georgia, serif;
+  --font-title: 'PT Serif', Georgia, serif;
+  --font-marathi-display: 'Yatra One', 'Noto Serif Devanagari', 'Mukta', cursive, serif;
+  --font-marathi-body: 'Yatra One', 'Mukta', 'Noto Sans Devanagari', sans-serif;
+  --font-marathi: 'Yatra One', cursive, sans-serif;
 
-  /* Simple, Clean, Web-Readable Body & UI */
-  --font-ui: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-body: 'Plus Jakarta Sans', 'Mukta', sans-serif;
+  /* Simple, Clean, Web-Readable Body & UI with Yatra One for Devanagari characters */
+  --font-ui: 'Plus Jakarta Sans', 'Yatra One', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-body: 'Plus Jakarta Sans', 'Yatra One', 'Mukta', sans-serif;
 }
 
 * {
@@ -37,16 +39,47 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-h1, h2, .brand-title {
+h1, h2, h3, h4, h5, h6,
+.brand-title,
+.entry-title,
+.drawer-title,
+.coming-soon-title,
+.share-title {
   font-family: var(--font-brand);
-  letter-spacing: 0.8px;
-  font-weight: 600;
+  letter-spacing: 0.6px;
+  font-weight: 700;
 }
 
+/* Marathi / Devanagari script typography across website */
 .marathi-title,
+.entry-subtitle,
+.entry-btn-sub,
 .entry-playlist-hindi,
+.entry-om,
+.brand-om,
+.about-om,
+.brand-sub,
 .track-title,
-.rotation-name {
+.mini-title,
+.rotation-name,
+.phase-tab-hindi,
+.dhol-trigger-text,
+.dhol-menu-title,
+.dhol-card-name,
+.dhol-card-tagline,
+.dhol-playing-pill,
+.dhol-stop-btn,
+.drawer-subtitle,
+.queue-playlist-title,
+.track-item-title,
+.playlist-card-title,
+.coming-soon-sub,
+.about-tagline,
+.preview-track,
+.search-item-title,
+.credit,
+[lang="mr"],
+:lang(mr) {
   font-family: var(--font-marathi-display);
   letter-spacing: 0.2px;
 }

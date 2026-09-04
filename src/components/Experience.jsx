@@ -3,7 +3,6 @@ import { ListMusic, Sparkles } from 'lucide-react'
 import Player from './Player'
 import MiniPlayer from './MiniPlayer'
 import Drawer from './Drawer'
-import PhaseSelector from './PhaseSelector'
 import { useListenerCount, useISTClock } from '../hooks/useTimePlaylist'
 import './Experience.css'
 
@@ -80,13 +79,8 @@ export default function Experience({
             )}
           </div>
 
-          {/* Top Center: 3 Festival Phase Tabs (Aagman · Utsav · Visarjan) */}
-          <div className="top-center-ui">
-            <PhaseSelector
-              currentPhase={currentPhase}
-              onSelectPhase={onSelectPhase}
-            />
-          </div>
+          {/* Top Center: Clean center to showcase festival artwork */}
+          <div className="top-center-ui" />
 
           {/* Top Right: Explore & Playlist Button */}
           <div className="top-right-ui">
@@ -98,7 +92,7 @@ export default function Experience({
               <ListMusic size={18} />
               <span>Songs & Queue</span>
               <span className="explore-badge">
-                <Sparkles size={12} /> 13
+                <Sparkles size={12} /> {activePlaylist?.tracks?.length || ytPlayer?.tracks?.length || 29}
               </span>
             </button>
           </div>
@@ -118,6 +112,8 @@ export default function Experience({
           <Player
             ytPlayer={ytPlayer}
             dholAudio={dholAudio}
+            currentPhase={currentPhase}
+            onSelectPhase={onSelectPhase}
             onMinimize={onMinimize}
             onOpenDrawer={() => setIsDrawerOpen(true)}
             onSelectTrack={onSelectTrack}

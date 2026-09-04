@@ -1,164 +1,117 @@
-/* ---- Phase Selector Container ---- */
+/* ---- Category Selector Container ---- */
 .phase-selector-container {
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 30;
+  max-width: 100%;
 }
 
 .phase-tabs-glass {
   display: flex;
   align-items: center;
-  gap: 0.4rem;
-  background: rgba(18, 10, 4, 0.75);
+  gap: 0.35rem;
+  background: rgba(18, 10, 4, 0.8);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(249, 115, 22, 0.3);
-  padding: 0.35rem;
+  padding: 0.32rem 0.45rem;
   border-radius: 40px;
-  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 25px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.12);
 }
 
 /* ---- Individual Tab ---- */
 .phase-tab {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
+  gap: 0.45rem;
   background: transparent;
   border: 1px solid transparent;
-  padding: 0.45rem 1.1rem;
+  padding: 0.46rem 0.95rem;
   border-radius: 30px;
   cursor: pointer;
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 0.75);
   outline: none;
-  position: relative;
-  min-width: 105px;
+  white-space: nowrap;
+  user-select: none;
 }
 
 .phase-tab:hover {
   color: #fff;
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .phase-tab.selected {
-  background: linear-gradient(135deg, rgba(249, 115, 22, 0.35) 0%, rgba(234, 88, 12, 0.2) 100%);
+  background: linear-gradient(135deg, rgba(249, 115, 22, 0.38) 0%, rgba(234, 88, 12, 0.22) 100%);
   border-color: var(--primary);
   color: #fff;
-  box-shadow: 0 2px 14px rgba(249, 115, 22, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-  transform: scale(1.02);
-}
-
-.phase-tab-content {
-  display: flex;
-  align-items: center;
-  gap: 0.45rem;
+  box-shadow: 0 2px 14px rgba(249, 115, 22, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  transform: translateY(-1px);
 }
 
 .phase-tab-emoji {
-  font-size: 1.15rem;
+  font-size: 1.05rem;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.phase-tab-text {
-  display: flex;
-  align-items: baseline;
-  gap: 0.3rem;
-}
-
-.phase-tab-hindi {
-  font-family: var(--font-marathi-display);
-  font-size: 1.02rem;
+.phase-tab-title {
+  font-family: var(--font-brand);
+  font-size: 0.84rem;
   font-weight: 600;
   letter-spacing: 0.3px;
-  color: #fff;
+  color: rgba(255, 255, 255, 0.85);
+  transition: color 0.2s;
 }
 
-.phase-tab.selected .phase-tab-hindi {
+.phase-tab.selected .phase-tab-title {
   color: #fef08a;
   text-shadow: 0 0 10px rgba(254, 240, 138, 0.4);
 }
 
-.phase-tab-english {
-  font-family: var(--font-ui);
-  font-size: 0.72rem;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.55);
-  text-transform: uppercase;
-  letter-spacing: 0.4px;
-}
-
-.phase-tab.selected .phase-tab-english {
-  color: rgba(255, 255, 255, 0.9);
-}
-
-.phase-tab-dates {
-  font-family: var(--font-ui);
-  font-size: 0.65rem;
-  color: rgba(255, 255, 255, 0.45);
-  margin-top: 0.1rem;
-  font-weight: 500;
-}
-
-.phase-tab.selected .phase-tab-dates {
-  color: #fdba74;
-}
-
-/* Live Active Schedule Dot */
-.phase-live-indicator {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 8px;
-  height: 8px;
-  margin-left: 0.1rem;
-}
-
-.phase-live-pulse {
-  width: 6px;
-  height: 6px;
-  background: #22c55e;
-  border-radius: 50%;
-  box-shadow: 0 0 8px #22c55e;
-  animation: livePulse 1.8s infinite;
-}
-
-@keyframes livePulse {
-  0% {
-    transform: scale(0.9);
-    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
-  }
-  70% {
-    transform: scale(1.1);
-    box-shadow: 0 0 0 6px rgba(34, 197, 94, 0);
-  }
-  100% {
-    transform: scale(0.9);
-    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
-  }
-}
-
 /* ---- Responsive ---- */
-@media (max-width: 680px) {
+@media (max-width: 1100px) {
   .phase-tabs-glass {
-    gap: 0.2rem;
-    padding: 0.25rem;
+    gap: 0.22rem;
+    padding: 0.28rem 0.35rem;
   }
 
   .phase-tab {
-    padding: 0.35rem 0.6rem;
-    min-width: 80px;
+    padding: 0.4rem 0.75rem;
+    gap: 0.35rem;
   }
 
-  .phase-tab-dates {
-    display: none; /* Hide date text on narrow screens to keep top UI super clean */
+  .phase-tab-title {
+    font-size: 0.78rem;
+    letter-spacing: 0.2px;
   }
 
-  .phase-tab-hindi {
-    font-size: 0.92rem;
+  .phase-tab-emoji {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .phase-tabs-glass {
+    overflow-x: auto;
+    max-width: 95vw;
+    scrollbar-width: none;
+    padding: 0.25rem;
+  }
+  .phase-tabs-glass::-webkit-scrollbar {
+    display: none;
   }
 
-  .phase-tab-english {
-    font-size: 0.65rem;
+  .phase-tab {
+    padding: 0.35rem 0.65rem;
+    gap: 0.3rem;
+  }
+
+  .phase-tab-title {
+    font-size: 0.74rem;
   }
 }

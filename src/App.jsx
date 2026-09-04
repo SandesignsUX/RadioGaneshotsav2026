@@ -2,7 +2,8 @@ import { useState, useEffect, useCallback } from 'react'
 import { useYouTubePlayer } from './hooks/useYouTubePlayer'
 import { useTimePlaylist } from './hooks/useTimePlaylist'
 import { useDholAudio } from './hooks/useDholAudio'
-import { getDefaultPhase } from './data/phases'
+import { getDefaultPhase, FESTIVAL_CATEGORIES } from './data/phases'
+import { getPlaylistById } from './data/playlists'
 import EntryGate from './components/EntryGate'
 import Experience from './components/Experience'
 import './App.css'
@@ -64,6 +65,10 @@ function App() {
 
   const handleSelectPlaylist = useCallback((playlist) => {
     setSelectedPlaylist(playlist)
+    const matchingPhase = FESTIVAL_CATEGORIES.find(c => c.id === playlist.id)
+    if (matchingPhase) {
+      setCurrentPhase(matchingPhase)
+    }
     if (playlist.tracks && playlist.tracks.length > 0) {
       if (isDholPlaying) {
         stopDhol()
@@ -81,7 +86,15 @@ function App() {
 
   const handleSelectPhase = useCallback((phase) => {
     setCurrentPhase(phase)
-  }, [])
+    const targetPlaylist = getPlaylistById(phase.id)
+    if (targetPlaylist && targetPlaylist.tracks && targetPlaylist.tracks.length > 0) {
+      setSelectedPlaylist(targetPlaylist)
+      if (isDholPlaying) {
+        stopDhol()
+      }
+      start(targetPlaylist.tracks, 0)
+    }
+  }, [start, isDholPlaying, stopDhol])
 
   return (
     <div className="app-container">

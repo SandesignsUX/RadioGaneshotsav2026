@@ -471,16 +471,51 @@
   font-weight: 500;
 }
 
+.playlist-footer-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
 .now-active-pill {
   font-family: var(--font-ui);
-  background: var(--primary);
-  color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.85);
   font-size: 0.7rem;
   font-weight: 700;
   padding: 0.25rem 0.65rem;
   border-radius: 20px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  transition: all 0.2s;
+}
+
+.now-active-pill.active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+  box-shadow: 0 0 10px rgba(249, 115, 22, 0.4);
+}
+
+.playlist-yt-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.6);
+  transition: all 0.2s ease;
+}
+
+.playlist-yt-link:hover {
+  background: rgba(239, 68, 68, 0.2);
+  border-color: rgba(239, 68, 68, 0.5);
+  color: #f87171;
+  transform: scale(1.08);
 }
 
 .select-pl-btn {
@@ -586,10 +621,10 @@
 }
 
 .about-section h4 {
-  font-family: var(--font-ui);
+  font-family: var(--font-brand);
   font-size: 0.95rem;
   color: #fdba74;
-  font-weight: 600;
+  font-weight: 700;
   margin-bottom: 0.5rem;
 }
 
@@ -626,7 +661,7 @@
 }
 
 .about-phase-name {
-  font-family: var(--font-marathi-display);
+  font-family: var(--font-brand);
   font-size: 0.92rem;
   color: #fff;
   font-weight: 600;

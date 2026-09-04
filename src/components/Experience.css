@@ -70,7 +70,8 @@
   gap: 0.5rem;
   pointer-events: auto;
   animation: uiFadeIn 1s ease-out 0.3s both;
-  width: 28%;
+  width: auto;
+  flex-shrink: 0;
 }
 
 .brand-badge {
@@ -227,7 +228,8 @@
   display: flex;
   justify-content: flex-end;
   pointer-events: auto;
-  width: 28%;
+  width: auto;
+  flex-shrink: 0;
   animation: uiFadeIn 1s ease-out 0.5s both;
 }
 

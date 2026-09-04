@@ -62,7 +62,7 @@ export default function Drawer({
           <div className="drawer-title-group">
             <h2 className="drawer-title">Ganeshotsav Radio</h2>
             <span className="drawer-subtitle">
-              {currentPhase?.emoji} {currentPhase?.nameHindi} २०२६ · Songs & Queue
+              {currentPhase?.emoji} {currentPhase?.name} · Songs & Queue
             </span>
           </div>
           <button className="close-btn" onClick={onClose} aria-label="Close menu">
@@ -120,7 +120,7 @@ export default function Drawer({
                   </p>
                 </div>
                 <a
-                  href={YOUTUBE_PLAYLIST_URL}
+                  href={activePlaylist?.url || YOUTUBE_PLAYLIST_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="yt-source-link"
@@ -171,9 +171,12 @@ export default function Drawer({
                       </div>
 
                       <div className="track-item-right">
-                        {track.durationHint && (
-                          <span className="track-duration">{track.durationHint}</span>
+                        {isCurrent && isPlaying && (
+                          <div className="track-playing-indicator">
+                            <span /><span /><span />
+                          </div>
                         )}
+                        <span className="track-duration">{track.durationHint}</span>
                       </div>
                     </div>
                   )
@@ -186,7 +189,7 @@ export default function Drawer({
           {activeTab === 'playlists' && (
             <div className="tab-pane playlists-pane">
               <p className="pane-intro">
-                All official tracks from the Ganeshotsav 2026 YouTube playlist are streaming live:
+                All 4 official festival playlists are streaming live 24x7:
               </p>
               <div className="playlists-grid">
                 {allPlaylists.map((pl) => {
@@ -208,21 +211,25 @@ export default function Drawer({
                         <span className="tracks-count">
                           <Music2 size={13} /> {pl.tracks.length} Songs
                         </span>
-                        <span className="now-active-pill">Playing Live</span>
+                        <div className="playlist-footer-actions">
+                          <span className={`now-active-pill ${isSelected ? 'active' : ''}`}>
+                            {isSelected ? 'Playing Live 🔴' : 'Play Playlist ▶'}
+                          </span>
+                          <a
+                            href={pl.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="playlist-yt-link"
+                            onClick={(e) => e.stopPropagation()}
+                            title={`Open ${pl.name} on YouTube`}
+                          >
+                            <ExternalLink size={13} />
+                          </a>
+                        </div>
                       </div>
                     </div>
                   )
                 })}
-
-                {/* Coming Soon Notice Card */}
-                <div className="coming-soon-playlist-card">
-                  <div className="coming-soon-badge">✨ Upcoming</div>
-                  <h4 className="coming-soon-title">More Playlists Coming Soon</h4>
-                  <p className="coming-soon-sub">नवीन प्लेलिस्ट लवकरच जोडल्या जातील</p>
-                  <p className="coming-soon-desc">
-                    Special Dhol Tasha, Morning Stotras, and Visarjan themed collections will be unlocked in upcoming updates!
-                  </p>
-                </div>
               </div>
             </div>
           )}
@@ -238,16 +245,15 @@ export default function Drawer({
                 </p>
               </div>
 
-              {/* 3 Phases of Ganeshotsav */}
+              {/* Music Categories */}
               <div className="about-section">
-                <h4>🗓️ 3 Phases of Ganeshotsav 2026</h4>
+                <h4>🎶 4 Music Categories</h4>
                 <div className="about-phases-list">
                   {FESTIVAL_PHASES.map((p) => (
                     <div key={p.id} className="about-phase-item">
                       <div className="about-phase-header">
                         <span className="about-phase-emoji">{p.emoji}</span>
-                        <strong className="about-phase-name">{p.nameHindi} ({p.name})</strong>
-                        <span className="about-phase-dates">{p.activeRangeText}</span>
+                        <strong className="about-phase-name">{p.name}</strong>
                       </div>
                       <p className="about-phase-desc">{p.description}</p>
                     </div>
