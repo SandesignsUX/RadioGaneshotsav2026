@@ -1,4 +1,5 @@
 import { useState, useRef, useCallback, useEffect } from 'react'
+import { DHOL_INSTRUMENTS } from '../data/dholInstruments'
 
 /**
  * useDholAudio — Web Audio API percussion synthesizer & sequencer
@@ -229,33 +230,57 @@ export function useDholAudio() {
     }
   }, [getAudioContext, triggerDhol, triggerTasha, triggerZanj, triggerHalgi])
 
+  const pauseDhol = useCallback(() => {
+    if (timerRef.current) {
+      clearInterval(timerRef.current)
+      timerRef.current = null
+    }
+    setIsDholPlaying(false)
+    stepRef.current = 0
+  }, [])
+
   const stopDhol = useCallback(() => {
     if (timerRef.current) {
       clearInterval(timerRef.current)
       timerRef.current = null
     }
     setIsDholPlaying(false)
-    setActiveDhol(null)
     stepRef.current = 0
   }, [])
 
   const playDhol = useCallback((dholInstrument) => {
-    stopDhol()
-    setActiveDhol(dholInstrument)
+    if (timerRef.current) {
+      clearInterval(timerRef.current)
+      timerRef.current = null
+    }
+
+    const inst = dholInstrument || activeDholRef.current || DHOL_INSTRUMENTS[0]
+    setActiveDhol(inst)
     setIsDholPlaying(true)
 
     // Calculate step interval based on instrument BPM (16th notes)
-    const bpm = dholInstrument.bpm || 140
+    const bpm = inst.bpm || 140
     const stepDurationMs = (60 / bpm / 4) * 1000
 
     stepRef.current = 0
-    scheduleStep(0, dholInstrument.id)
+    scheduleStep(0, inst.id)
 
     timerRef.current = setInterval(() => {
       stepRef.current = (stepRef.current + 1) % 16
-      scheduleStep(stepRef.current, dholInstrument.id)
+      scheduleStep(stepRef.current, inst.id)
     }, stepDurationMs)
-  }, [stopDhol, scheduleStep])
+  }, [scheduleStep])
+
+  const toggleDhol = useCallback((dholInstrument) => {
+    const targetInst = dholInstrument || activeDholRef.current || DHOL_INSTRUMENTS[0]
+    if (isDholPlaying) {
+      if (!dholInstrument || targetInst.id === activeDholRef.current?.id) {
+        pauseDhol()
+        return
+      }
+    }
+    playDhol(targetInst)
+  }, [isDholPlaying, pauseDhol, playDhol])
 
   // Cleanup on unmount
   useEffect(() => {
@@ -270,7 +295,9 @@ export function useDholAudio() {
     activeDhol,
     isDholPlaying,
     playDhol,
+    pauseDhol,
     stopDhol,
+    toggleDhol,
     setDholVolume: setVolume
   }
 }
