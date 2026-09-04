@@ -9,7 +9,7 @@ export default function EntryGate({ onEnter }) {
     <div className="entry-gate">
       {/* Full-screen artwork background */}
       <img
-        src="/Aagman Background.png"
+        src={`${import.meta.env.BASE_URL}Aagman Background.png`}
         alt="Ganeshotsav 2026 Celebration"
         className="entry-bg"
       />

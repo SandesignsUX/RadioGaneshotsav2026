@@ -7,7 +7,7 @@ export const FESTIVAL_CATEGORIES = [
     name: 'Marathi Songs',
     subtitle: 'Iconic Marathi Devotional & Utsav Songs',
     description: 'Soulful and energetic Marathi devotional tracks, Dhol Tasha anthems, and timeless Bappa geet.',
-    bgImage: '/Aagman Background.png',
+    bgImage: `${import.meta.env.BASE_URL}Aagman Background.png`,
     emoji: '🚩',
     badge: 'Marathi Special'
   },
@@ -16,7 +16,7 @@ export const FESTIVAL_CATEGORIES = [
     name: 'Hindi Songs',
     subtitle: 'Devotional Hindi Bhajans & Celebrations',
     description: 'Melodious Hindi Ganeshotsav bhajans, popular festival anthems, and divine offerings.',
-    bgImage: '/Aagman Background.png',
+    bgImage: `${import.meta.env.BASE_URL}Aagman Background.png`,
     emoji: '🪷',
     badge: 'Hindi Bhajans'
   },
@@ -25,7 +25,7 @@ export const FESTIVAL_CATEGORIES = [
     name: 'Ganpati Aarti',
     subtitle: 'Traditional Aartis & Stutis',
     description: 'Divine morning and evening Aartis, Sukh Karta Dukh Harta, Shej Aarti, and sacred chants.',
-    bgImage: '/Aagman Background.png',
+    bgImage: `${import.meta.env.BASE_URL}Aagman Background.png`,
     emoji: '🪔',
     badge: 'Maha Aarti'
   },
@@ -34,7 +34,7 @@ export const FESTIVAL_CATEGORIES = [
     name: 'Ganeshotsav DJ Songs',
     subtitle: 'High-Energy DJ Remixes & Procession Beats',
     description: 'Electrifying DJ beats, high-energy festival dance mixes, and thunderous procession bass.',
-    bgImage: '/Aagman Background.png',
+    bgImage: `${import.meta.env.BASE_URL}Aagman Background.png`,
     emoji: '🎧',
     badge: 'DJ Remixes'
   }

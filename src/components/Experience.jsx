@@ -27,7 +27,7 @@ export default function Experience({
       {/* Background Artwork */}
       <div className="artwork-layer">
         <img
-          src="/Aagman Background.png"
+          src={`${import.meta.env.BASE_URL}Aagman Background.png`}
           alt="Ganeshotsav 2026 Celebration"
           className="experience-bg"
         />
