@@ -1,10 +1,18 @@
+import { ChevronUp } from 'lucide-react'
 import { FESTIVAL_CATEGORIES } from '../data/phases'
 import './PhaseSelector.css'
 
-export default function PhaseSelector({ currentPhase, onSelectPhase }) {
+export default function PhaseSelector({
+  currentPhase,
+  onSelectPhase,
+  isCategoryMenuOpen,
+  onToggleCategoryMenu,
+  categoryTriggerRef
+}) {
   return (
     <div className="phase-selector-container">
-      <div className="phase-tabs-glass" role="tablist" aria-label="Ganeshotsav Music Categories">
+      {/* Desktop View: Horizontal Toggle Bar */}
+      <div className="phase-tabs-glass desktop-phase-tabs" role="tablist" aria-label="Ganeshotsav Music Categories">
         {FESTIVAL_CATEGORIES.map((category) => {
           const isSelected = currentPhase?.id === category.id
 
@@ -23,6 +31,21 @@ export default function PhaseSelector({ currentPhase, onSelectPhase }) {
             </button>
           )
         })}
+      </div>
+
+      {/* Mobile View: Upward Opening Dropdown Trigger Button */}
+      <div className="mobile-category-panel-wrapper" ref={categoryTriggerRef}>
+        <button
+          className={`category-dropdown-panel ${isCategoryMenuOpen ? 'active' : ''}`}
+          onClick={onToggleCategoryMenu}
+          title="Choose song category"
+          aria-label="Choose song category"
+          aria-expanded={isCategoryMenuOpen}
+        >
+          <span className="category-trigger-emoji">{currentPhase?.emoji || '🎧'}</span>
+          <span className="category-trigger-text">{currentPhase?.name || 'Category'}</span>
+          <ChevronUp size={14} className={`category-chevron ${isCategoryMenuOpen ? 'open' : ''}`} />
+        </button>
       </div>
     </div>
   )

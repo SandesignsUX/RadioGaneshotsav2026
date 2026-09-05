@@ -776,6 +776,176 @@
   color: #fef08a;
 }
 
+/* ---- Upwards Opening Category Dropdown Menu ---- */
+.category-upward-menu {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: clamp(16px, calc(50% - 175px), calc(100% - 360px));
+  width: 350px;
+  max-width: 92vw;
+  background: rgba(18, 10, 4, 0.96);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(249, 115, 22, 0.4);
+  border-radius: 20px;
+  padding: 1rem;
+  box-shadow: 0 -10px 45px rgba(0, 0, 0, 0.85), 0 0 25px rgba(249, 115, 22, 0.2);
+  z-index: 150;
+  animation: upwardPop 0.24s cubic-bezier(0.16, 1, 0.3, 1) both;
+  overflow-y: auto;
+}
+
+.category-menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 0.75rem;
+  margin-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.category-menu-title-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.category-menu-title {
+  font-family: var(--font-brand);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: 0.3px;
+}
+
+.category-menu-subtitle {
+  font-family: var(--font-ui);
+  font-size: 0.68rem;
+  color: rgba(255, 255, 255, 0.5);
+  margin-top: 1px;
+}
+
+.category-close-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.category-close-btn:hover {
+  background: rgba(249, 115, 22, 0.3);
+  color: #fff;
+}
+
+.category-options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.category-option-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.65rem;
+  padding: 0.65rem 0.8rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  text-align: left;
+  outline: none;
+  width: 100%;
+}
+
+.category-option-card:hover {
+  background: rgba(249, 115, 22, 0.12);
+  border-color: rgba(249, 115, 22, 0.35);
+  transform: translateX(2px);
+}
+
+.category-option-card.selected-category {
+  background: rgba(249, 115, 22, 0.2);
+  border-color: var(--primary);
+  box-shadow: 0 0 15px rgba(249, 115, 22, 0.25);
+}
+
+.category-card-left {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  min-width: 0;
+}
+
+.category-card-emoji {
+  font-size: 1.25rem;
+  flex-shrink: 0;
+}
+
+.category-card-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.category-card-name {
+  font-family: var(--font-brand);
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: #fff;
+  line-height: 1.25;
+}
+
+.category-card-desc {
+  font-family: var(--font-ui);
+  font-size: 0.68rem;
+  color: rgba(255, 255, 255, 0.55);
+  margin-top: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.category-active-pill {
+  font-family: var(--font-ui);
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 0.22rem 0.55rem;
+  border-radius: 20px;
+  background: var(--primary);
+  color: #fff;
+  box-shadow: 0 0 10px rgba(249, 115, 22, 0.6);
+  flex-shrink: 0;
+}
+
+.category-select-pill {
+  font-family: var(--font-ui);
+  font-size: 0.68rem;
+  font-weight: 600;
+  padding: 0.22rem 0.55rem;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.75);
+  flex-shrink: 0;
+}
+
+.category-menu-tip {
+  font-family: var(--font-ui);
+  font-size: 0.68rem;
+  color: rgba(255, 255, 255, 0.45);
+  text-align: center;
+  margin-top: 0.75rem;
+  margin-bottom: 0;
+}
+
 /* ---- Controls ---- */
 .player-controls {
   display: flex;
@@ -979,20 +1149,15 @@
     bottom: 0;
   }
 
-  /* Scrollable Categories Bar with Dhol Tasha pinned on the Left */
+  /* Dual Control Bar: Dhol Tasha on Left & Category Dropdown on Right (Centered on Mobile) */
   .player-categories-wrapper {
     margin-bottom: 0.35rem;
-    overflow-x: auto;
     max-width: 98vw;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
-    scroll-behavior: smooth;
-    justify-content: flex-start;
+    justify-content: center;
+    align-items: center;
     padding: 0.2rem 0.4rem;
     gap: 0.45rem;
-  }
-  .player-categories-wrapper::-webkit-scrollbar {
-    display: none;
+    overflow: visible;
   }
 
   .dhol-dropdown-wrapper {
@@ -1129,6 +1294,20 @@
   }
 
   .dhol-upward-menu {
+    position: fixed;
+    bottom: max(115px, calc(115px + env(safe-area-inset-bottom)));
+    left: 0;
+    right: 0;
+    margin-inline: auto;
+    width: min(350px, calc(100vw - 24px));
+    max-width: calc(100vw - 24px);
+    max-height: 70vh;
+    border-radius: 20px;
+    box-shadow: 0 -10px 45px rgba(0, 0, 0, 0.85);
+    z-index: 150;
+  }
+
+  .category-upward-menu {
     position: fixed;
     bottom: max(115px, calc(115px + env(safe-area-inset-bottom)));
     left: 0;

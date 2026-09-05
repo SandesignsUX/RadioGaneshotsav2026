@@ -13,6 +13,7 @@ import {
   X
 } from 'lucide-react'
 import PhaseSelector from './PhaseSelector'
+import { FESTIVAL_CATEGORIES } from '../data/phases'
 import { DHOL_INSTRUMENTS } from '../data/dholInstruments'
 import './Player.css'
 
@@ -33,11 +34,14 @@ export default function Player({
   onSelectTrack
 }) {
   const [isDholMenuOpen, setIsDholMenuOpen] = useState(false)
+  const [isCategoryMenuOpen, setIsCategoryMenuOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
   const [isSearchOpen, setIsSearchOpen] = useState(false)
 
   const dholMenuRef = useRef(null)
   const dholTriggerRef = useRef(null)
+  const categoryMenuRef = useRef(null)
+  const categoryTriggerRef = useRef(null)
   const searchWrapperRef = useRef(null)
   const searchInputRef = useRef(null)
 
@@ -96,10 +100,47 @@ export default function Player({
       ) {
         setIsDholMenuOpen(false)
       }
+      if (
+        categoryMenuRef.current &&
+        !categoryMenuRef.current.contains(e.target) &&
+        !categoryTriggerRef.current?.contains(e.target)
+      ) {
+        setIsCategoryMenuOpen(false)
+      }
     }
     document.addEventListener('mousedown', handleClickOutside)
     return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [])
+
+  const handleToggleDholMenu = () => {
+    setIsDholMenuOpen(prev => {
+      if (!prev) {
+        setIsCategoryMenuOpen(false)
+        setIsSearchOpen(false)
+      }
+      return !prev
+    })
+  }
+
+  const handleToggleCategoryMenu = () => {
+    setIsCategoryMenuOpen(prev => {
+      if (!prev) {
+        setIsDholMenuOpen(false)
+        setIsSearchOpen(false)
+      }
+      return !prev
+    })
+  }
+
+  const handleToggleSearch = () => {
+    setIsSearchOpen(prev => {
+      if (!prev) {
+        setIsDholMenuOpen(false)
+        setIsCategoryMenuOpen(false)
+      }
+      return !prev
+    })
+  }
 
   const progress = duration > 0 ? (currentTime / duration) * 100 : 0
 
@@ -255,6 +296,61 @@ export default function Player({
         </div>
       )}
 
+      {/* Upwards Opening Category Dropdown Menu (Mobile) */}
+      {isCategoryMenuOpen && (
+        <div className="category-upward-menu" ref={categoryMenuRef}>
+          <div className="category-menu-header">
+            <div className="category-menu-title-group">
+              <span className="category-menu-title">🎵 Music Categories</span>
+              <span className="category-menu-subtitle">Switch Devotional Playlist</span>
+            </div>
+            <button
+              className="category-close-btn"
+              onClick={() => setIsCategoryMenuOpen(false)}
+              aria-label="Close categories menu"
+            >
+              <X size={14} />
+            </button>
+          </div>
+
+          <div className="category-options-list">
+            {FESTIVAL_CATEGORIES.map((cat) => {
+              const isSelected = currentPhase?.id === cat.id
+              return (
+                <button
+                  key={cat.id}
+                  className={`category-option-card ${isSelected ? 'selected-category' : ''}`}
+                  onClick={() => {
+                    onSelectPhase(cat)
+                    setIsCategoryMenuOpen(false)
+                  }}
+                >
+                  <div className="category-card-left">
+                    <span className="category-card-emoji">{cat.emoji}</span>
+                    <div className="category-card-text">
+                      <span className="category-card-name">{cat.name}</span>
+                      <span className="category-card-desc">{cat.subtitle}</span>
+                    </div>
+                  </div>
+
+                  <div className="category-card-right">
+                    {isSelected ? (
+                      <span className="category-active-pill">Active ✓</span>
+                    ) : (
+                      <span className="category-select-pill">Select ▶</span>
+                    )}
+                  </div>
+                </button>
+              )
+            })}
+          </div>
+
+          <p className="category-menu-tip">
+            💡 Tip: Tap any category to load its devotional songs and playlist.
+          </p>
+        </div>
+      )}
+
       {/* Category Toggle Bar with Dhol Tasha Button on the Left */}
       <div className="player-categories-wrapper">
         {/* Dhol Tasha Panel (Dedicated Play/Pause Button + Trigger) on Left */}
@@ -263,7 +359,7 @@ export default function Player({
             {/* Left section: Emoji + Label (clicking toggles menu open/close) */}
             <button
               className="dhol-panel-label-btn"
-              onClick={() => setIsDholMenuOpen(prev => !prev)}
+              onClick={handleToggleDholMenu}
               title="Choose Dhol Tasha beat"
               aria-label="Choose Dhol Tasha beat"
             >
@@ -290,7 +386,7 @@ export default function Player({
             {/* Chevron toggle button to open/close menu */}
             <button
               className="dhol-panel-chevron-btn"
-              onClick={() => setIsDholMenuOpen(prev => !prev)}
+              onClick={handleToggleDholMenu}
               title={isDholMenuOpen ? 'Close Dhol menu' : 'Open Dhol menu'}
               aria-label="Toggle Dhol Menu"
             >
@@ -300,11 +396,17 @@ export default function Player({
           </div>
         </div>
 
-        {/* Categories Toggle Bar */}
+        {/* Categories Toggle Bar / Mobile Upward Dropdown */}
         {currentPhase && onSelectPhase && (
           <PhaseSelector
             currentPhase={currentPhase}
-            onSelectPhase={onSelectPhase}
+            onSelectPhase={(cat) => {
+              onSelectPhase(cat)
+              setIsCategoryMenuOpen(false)
+            }}
+            isCategoryMenuOpen={isCategoryMenuOpen}
+            onToggleCategoryMenu={handleToggleCategoryMenu}
+            categoryTriggerRef={categoryTriggerRef}
           />
         )}
       </div>
@@ -315,7 +417,7 @@ export default function Player({
         <div className="player-search-wrapper" ref={searchWrapperRef}>
           <button
             className={`search-trigger-btn ${isSearchOpen || searchQuery ? 'active' : ''}`}
-            onClick={() => setIsSearchOpen(prev => !prev)}
+            onClick={handleToggleSearch}
             title="Search songs"
             aria-label="Search devotional songs"
           >
