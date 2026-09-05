@@ -51,7 +51,7 @@ export default function Experience({
                 <h1>GANESHOTSAV RADIO</h1>
                 <span className="brand-year">2026</span>
               </div>
-              <p className="brand-sub">गणेशोत्सव २०२६ · Live Devotional Stream</p>
+              <p className="brand-sub">Live Devotional Stream · 24x7 Festival Radio</p>
             </div>
 
             <div className="status-bar">
@@ -73,7 +73,7 @@ export default function Experience({
               >
                 <span className="rotation-label">Now on air</span>
                 <span className="rotation-name">
-                  {activePlaylist.emoji} {activePlaylist.nameHindi || activePlaylist.name}
+                  {activePlaylist.emoji} {activePlaylist.name}
                 </span>
               </div>
             )}

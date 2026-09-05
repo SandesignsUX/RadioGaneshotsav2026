@@ -311,8 +311,17 @@
 }
 
 @media (max-width: 600px) {
-  .brand-badge h1 { font-size: 0.88rem; letter-spacing: 1px; }
-  .brand-sub { font-size: 0.72rem; }
+  .top-ui {
+    padding: 0.65rem 0.85rem;
+    gap: 0.4rem;
+  }
+  .brand-badge {
+    padding: 0.45rem 0.75rem;
+    border-radius: 12px;
+  }
+  .brand-badge h1 { font-size: 0.84rem; letter-spacing: 0.8px; }
+  .brand-sub { font-size: 0.7rem; }
   .status-bar { display: none; }
-  .explore-btn { padding: 0.5rem 0.9rem; font-size: 0.75rem; }
+  .now-rotation { display: none; }
+  .explore-btn { padding: 0.45rem 0.8rem; font-size: 0.74rem; gap: 0.35rem; }
 }

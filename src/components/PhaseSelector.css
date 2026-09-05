@@ -96,22 +96,41 @@
 }
 
 @media (max-width: 768px) {
-  .phase-tabs-glass {
-    overflow-x: auto;
-    max-width: 95vw;
-    scrollbar-width: none;
-    padding: 0.25rem;
+  .phase-selector-container {
+    flex-shrink: 0;
   }
-  .phase-tabs-glass::-webkit-scrollbar {
-    display: none;
+
+  .phase-tabs-glass {
+    gap: 0.18rem;
+    padding: 0.2rem 0.3rem;
+    border-radius: 30px;
   }
 
   .phase-tab {
-    padding: 0.35rem 0.65rem;
-    gap: 0.3rem;
+    padding: 0.3rem 0.55rem;
+    gap: 0.25rem;
   }
 
   .phase-tab-title {
-    font-size: 0.74rem;
+    font-size: 0.72rem;
+  }
+
+  .phase-tab-emoji {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .phase-tab {
+    padding: 0.26rem 0.45rem;
+    gap: 0.2rem;
+  }
+
+  .phase-tab-title {
+    font-size: 0.68rem;
+  }
+
+  .phase-tab-emoji {
+    font-size: 0.78rem;
   }
 }

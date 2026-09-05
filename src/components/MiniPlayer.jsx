@@ -24,7 +24,7 @@ export default function MiniPlayer({ ytPlayer, dholAudio, onExpand }) {
 
       <div className="mini-track">
         <span className="mini-title">
-          {currentTrack?.titleHindi || currentTrack?.title || 'Ganeshotsav Radio'}
+          {currentTrack?.title || 'Ganeshotsav Radio'}
         </span>
         <span className="mini-artist">{currentTrack?.artist || '2026'}</span>
       </div>

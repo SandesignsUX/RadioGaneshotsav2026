@@ -38,7 +38,7 @@ export default function EntryGate({ onEnter }) {
 
         <div className="entry-brand">
           <h1 className="entry-title">GANESHOTSAV RADIO 2026</h1>
-          <p className="entry-subtitle">गणेशोत्सव रेडिओ २०२६</p>
+          <p className="entry-subtitle">Live Devotional Music & Festive Beats</p>
         </div>
 
         <div className="entry-now-playing">
@@ -55,7 +55,7 @@ export default function EntryGate({ onEnter }) {
 
         <button className="entry-btn" onClick={onEnter} aria-label="Enter Ganeshotsav 2026">
           <span className="entry-btn-main">Enter Ganeshotsav 2026</span>
-          <span className="entry-btn-sub">· बाप्पाच्या उत्सवात सहभागी व्हा ·</span>
+          <span className="entry-btn-sub">· गणपती बाप्पा मोरया ·</span>
         </button>
 
         <p className="entry-hint">Spacebar toggles play/pause · Select Dhol Tasha beat anytime</p>

@@ -113,7 +113,7 @@ export default function Drawer({
                     <Sparkles size={12} /> YouTube Playlist
                   </span>
                   <h3 className="queue-playlist-title">
-                    {activePlaylist?.emoji} {activePlaylist?.nameHindi || activePlaylist?.name}
+                    {activePlaylist?.emoji} {activePlaylist?.name}
                   </h3>
                   <p className="queue-playlist-desc">
                     {tracks.length} devotional songs queued
@@ -159,11 +159,8 @@ export default function Drawer({
 
                         <div className="track-text">
                           <h4 className="track-item-title">
-                            {track.titleHindi || track.title}
+                            {track.title}
                           </h4>
-                          <span className="track-item-sub">
-                            {track.title !== track.titleHindi && track.title}
-                          </span>
                           <span className="track-item-artist">
                             {track.artist}
                           </span>
@@ -204,8 +201,8 @@ export default function Drawer({
                         <span className="playlist-emoji">{pl.emoji}</span>
                         <span className="playlist-time">{pl.timeRange}</span>
                       </div>
-                      <h4 className="playlist-card-title">{pl.nameHindi}</h4>
-                      <p className="playlist-card-sub">{pl.name} · {pl.subtitleHindi || pl.subtitle}</p>
+                      <h4 className="playlist-card-title">{pl.name}</h4>
+                      <p className="playlist-card-sub">{pl.subtitle}</p>
                       <p className="playlist-card-desc">{pl.description}</p>
                       <div className="playlist-card-footer">
                         <span className="tracks-count">
@@ -241,7 +238,7 @@ export default function Drawer({
                 <div className="about-om">ॐ</div>
                 <h3>Ganeshotsav Radio 2026</h3>
                 <p className="about-tagline">
-                  संपूर्ण गणेशोत्सव २०२६ · Non-stop live stream & Dhol Tasha
+                  Ganeshotsav 2026 · 24x7 Non-stop Devotional Music & Dhol Tasha
                 </p>
               </div>
 
@@ -268,18 +265,18 @@ export default function Drawer({
                   Switch instantly to authentic Maharashtrian percussion:
                 </p>
                 <ul className="about-dhol-list">
-                  <li><strong>Puneri Dhol Tasha</strong> – महानाद व जलद ताशा ठेका</li>
-                  <li><strong>Nashik Dhol</strong> – ताशेरी जुगलबंदी व डान्स ठेका</li>
-                  <li><strong>Kaavdi</strong> – झांज निनाद व ताशा साथ</li>
-                  <li><strong>Halgi</strong> – संबळ व हलगीचा कडकडाट</li>
+                  <li><strong>Puneri Dhol Tasha</strong> – Traditional thunderous bass and tasha rhythm</li>
+                  <li><strong>Nashik Dhol</strong> – High-energy procession dance beats and jugalbandi</li>
+                  <li><strong>Kaavdi</strong> – Resonant brass cymbals and marching cadence</li>
+                  <li><strong>Halgi</strong> – Crisp folk percussion of halgi and sambal</li>
                 </ul>
               </div>
 
               {/* YouTube Playlist Source */}
               <div className="about-section">
-                <h4>🌺 Verified YouTube Playlist</h4>
+                <h4>🌺 Verified YouTube Playlists</h4>
                 <p>
-                  Featuring 13 iconic Marathi devotional songs directly streamed from the official YouTube playlist.
+                  Curated devotional tracks directly streamed from official festival playlists.
                 </p>
                 <a
                   href={YOUTUBE_PLAYLIST_URL}

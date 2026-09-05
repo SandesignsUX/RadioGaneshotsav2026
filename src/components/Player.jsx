@@ -186,24 +186,132 @@ export default function Player({
 
   return (
     <div className="player-container">
-      {/* Category Toggle Buttons shifted above the Player Controls */}
-      {currentPhase && onSelectPhase && (
-        <div className="player-categories-wrapper">
+      {/* Category Toggle Bar with Dhol Tasha Button on the Left */}
+      <div className="player-categories-wrapper">
+        {/* Dhol Tasha Panel (Dedicated Play/Pause Button + Upward Beats Menu) on Left */}
+        <div className="dhol-dropdown-wrapper" ref={dholMenuRef}>
+          <div className={`dhol-panel ${isDholPlaying ? 'active-dhol' : ''}`}>
+            {/* Left section: Emoji + Label (clicking toggles menu open/close) */}
+            <button
+              className="dhol-panel-label-btn"
+              onClick={() => setIsDholMenuOpen(prev => !prev)}
+              title="Choose Dhol Tasha beat"
+              aria-label="Choose Dhol Tasha beat"
+            >
+              <span className="dhol-trigger-emoji">{activeDhol ? activeDhol.emoji : '🥁'}</span>
+              <span className="dhol-trigger-text">
+                {activeDhol ? activeDhol.name : 'Dhol Tasha'}
+              </span>
+            </button>
+
+            {/* Dedicated Button: ONLY plays or pauses the beats, located beside text label */}
+            <button
+              className={`dhol-panel-play-btn ${isDholPlaying ? 'playing' : ''}`}
+              onClick={handleToggleDholFromPanel}
+              title={isDholPlaying ? 'Pause Dhol beats' : 'Play Dhol beats'}
+              aria-label={isDholPlaying ? 'Pause Dhol Beats' : 'Play Dhol Beats'}
+            >
+              {isDholPlaying ? (
+                <Pause size={13} fill="currentColor" />
+              ) : (
+                <Play size={13} fill="currentColor" className="dhol-play-icon-offset" />
+              )}
+            </button>
+
+            {/* Chevron toggle button to open/close menu */}
+            <button
+              className="dhol-panel-chevron-btn"
+              onClick={() => setIsDholMenuOpen(prev => !prev)}
+              title={isDholMenuOpen ? 'Close Dhol menu' : 'Open Dhol menu'}
+              aria-label="Toggle Dhol Menu"
+            >
+              {isDholPlaying && <span className="dhol-loop-dot" title="Dhol loop active" />}
+              <ChevronUp size={14} className={`dhol-chevron ${isDholMenuOpen ? 'open' : ''}`} />
+            </button>
+          </div>
+
+          {/* Upwards Opening Dhol Menu */}
+          {isDholMenuOpen && (
+            <div className="dhol-upward-menu">
+              <div className="dhol-menu-header">
+                <div className="dhol-menu-title-group">
+                  <span className="dhol-menu-title">🥁 Live Dhol Tasha Beats</span>
+                  <span className="dhol-menu-subtitle">Continuous Maharashtrian Percussion Loop</span>
+                </div>
+                {isDholPlaying && (
+                  <button className="dhol-stop-btn" onClick={handlePlaySong} title="Resume Paused Song">
+                    <RotateCcw size={13} />
+                    <span>Resume Song</span>
+                  </button>
+                )}
+              </div>
+
+              <div className="dhol-options-list">
+                {DHOL_INSTRUMENTS.map((inst) => {
+                  const isSelected = activeDhol?.id === inst.id
+                  const isThisPlaying = isDholPlaying && isSelected
+                  return (
+                    <button
+                      key={inst.id}
+                      className={`dhol-option-card ${isSelected ? 'selected-dhol' : ''} ${isThisPlaying ? 'playing-card' : ''}`}
+                      onClick={() => handleSelectDhol(inst)}
+                    >
+                      <div className="dhol-card-left">
+                        <span className="dhol-card-emoji">{inst.emoji}</span>
+                        <div className="dhol-card-text">
+                          <span className="dhol-card-name">{inst.name}</span>
+                          <span className="dhol-card-tagline">{inst.tagline}</span>
+                        </div>
+                      </div>
+
+                      <div className="dhol-card-right">
+                        {isThisPlaying ? (
+                          <span className="dhol-playing-pill">
+                            Playing ⏸️
+                          </span>
+                        ) : isSelected ? (
+                          <span className="dhol-paused-pill">
+                            Paused ▶️
+                          </span>
+                        ) : (
+                          <span className="dhol-bpm-pill">Select ▶</span>
+                        )}
+                      </div>
+                    </button>
+                  )
+                })}
+              </div>
+
+              {isDholPlaying ? (
+                <p className="dhol-menu-tip">
+                  💡 Tip: Tap beat again to pause, or use the <strong>⏸</strong> button on the panel.
+                </p>
+              ) : activeDhol ? (
+                <p className="dhol-menu-tip">
+                  💡 Tip: Tap beat to play, or use the <strong>▶</strong> button on the panel.
+                </p>
+              ) : null}
+            </div>
+          )}
+        </div>
+
+        {/* Categories Toggle Bar */}
+        {currentPhase && onSelectPhase && (
           <PhaseSelector
             currentPhase={currentPhase}
             onSelectPhase={onSelectPhase}
           />
-        </div>
-      )}
+        )}
+      </div>
 
-      {/* Main Dock Row: Search on Left (Outside player-glass) + player-glass in Center + Dhol Tasha on Right (Outside player-glass) */}
+      {/* Main Dock Row: Search on Left (Outside player-glass) + player-glass in Center */}
       <div className="player-dock-row">
         {/* Outside Left: Circle-Shaped Search Button & Upward Popover */}
         <div className="player-search-wrapper" ref={searchWrapperRef}>
           <button
             className={`search-trigger-btn ${isSearchOpen || searchQuery ? 'active' : ''}`}
             onClick={() => setIsSearchOpen(prev => !prev)}
-            title="Search songs (गाणे शोधा)"
+            title="Search songs"
             aria-label="Search devotional songs"
           >
             <Search size={18} />
@@ -213,7 +321,7 @@ export default function Player({
           {isSearchOpen && (
             <div className="search-popover-menu">
               <div className="search-popover-header">
-                <span className="search-popover-title">🔍 Search Songs · गाणे शोधा</span>
+                <span className="search-popover-title">🔍 Search Songs</span>
                 <button
                   className="search-popover-close"
                   onClick={() => setIsSearchOpen(false)}
@@ -229,7 +337,7 @@ export default function Player({
                   ref={searchInputRef}
                   type="text"
                   className="search-input"
-                  placeholder="Search songs... / गाणे शोधा..."
+                  placeholder="Search songs by title or artist..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   autoFocus
@@ -261,7 +369,7 @@ export default function Player({
                       <div className="search-item-left">
                         <Play size={12} className="search-play-icon" />
                         <div className="search-item-text">
-                          <span className="search-item-title">{track.titleHindi || track.title}</span>
+                          <span className="search-item-title">{track.title}</span>
                           <span className="search-item-artist">{track.artist}</span>
                         </div>
                       </div>
@@ -295,8 +403,8 @@ export default function Player({
             <div className="track-details">
               {currentTrack ? (
                 <>
-                  <h3 className="track-title" title={currentTrack.titleHindi || currentTrack.title}>
-                    {isBuffering ? 'Loading…' : (currentTrack.titleHindi || currentTrack.title)}
+                  <h3 className="track-title" title={currentTrack.title}>
+                    {isBuffering ? 'Loading…' : currentTrack.title}
                   </h3>
                   <p className="track-artist" title={currentTrack.artist}>
                     {currentTrack.artist}
@@ -401,116 +509,6 @@ export default function Player({
               style={{ width: `${progress}%` }}
             />
           </div>
-        </div>
-
-        {/* Outside Right: Dhol Tasha Panel & Upward Menu */}
-        <div className="dhol-dropdown-wrapper" ref={dholMenuRef}>
-          <div className={`dhol-panel ${isDholPlaying ? 'active-dhol' : ''}`}>
-            {/* Left section: Emoji + Label (clicking toggles menu open/close) */}
-            <button
-              className="dhol-panel-label-btn"
-              onClick={() => setIsDholMenuOpen(prev => !prev)}
-              title="Choose Dhol Tasha beat (पुणेरी, नाशिक, कावडी, हलगी)"
-              aria-label="Choose Dhol Tasha beat"
-            >
-              <span className="dhol-trigger-emoji">{activeDhol ? activeDhol.emoji : '🥁'}</span>
-              <span className="dhol-trigger-text">
-                {activeDhol ? activeDhol.nameHindi : 'ढोल ताशा'}
-              </span>
-            </button>
-
-            {/* Dedicated Button: ONLY plays or pauses the beats, located beside text label */}
-            <button
-              className={`dhol-panel-play-btn ${isDholPlaying ? 'playing' : ''}`}
-              onClick={handleToggleDholFromPanel}
-              title={isDholPlaying ? 'Pause beats (ठेका थांबवा)' : 'Play beats (ठेका सुरू करा)'}
-              aria-label={isDholPlaying ? 'Pause Dhol Beats' : 'Play Dhol Beats'}
-            >
-              {isDholPlaying ? (
-                <Pause size={13} fill="currentColor" />
-              ) : (
-                <Play size={13} fill="currentColor" className="dhol-play-icon-offset" />
-              )}
-            </button>
-
-            {/* Chevron toggle button to open/close menu */}
-            <button
-              className="dhol-panel-chevron-btn"
-              onClick={() => setIsDholMenuOpen(prev => !prev)}
-              title={isDholMenuOpen ? 'Close Dhol menu' : 'Open Dhol menu'}
-              aria-label="Toggle Dhol Menu"
-            >
-              {isDholPlaying && <span className="dhol-loop-dot" title="Dhol loop active" />}
-              <ChevronUp size={14} className={`dhol-chevron ${isDholMenuOpen ? 'open' : ''}`} />
-            </button>
-          </div>
-
-          {/* Upwards Opening Menu */}
-          {isDholMenuOpen && (
-            <div className="dhol-upward-menu">
-              <div className="dhol-menu-header">
-                <div className="dhol-menu-title-group">
-                  <span className="dhol-menu-title">🥁 ढोल ताशा व वाद्य लूप</span>
-                  <span className="dhol-menu-subtitle">Continuous Maharashtrian Percussion Loop</span>
-                </div>
-                {isDholPlaying && (
-                  <button className="dhol-stop-btn" onClick={handlePlaySong} title="Resume Paused Song">
-                    <RotateCcw size={13} />
-                    <span>गाणे सुरू करा</span>
-                  </button>
-                )}
-              </div>
-
-              <div className="dhol-options-list">
-                {DHOL_INSTRUMENTS.map((inst) => {
-                  const isSelected = activeDhol?.id === inst.id
-                  const isThisPlaying = isDholPlaying && isSelected
-                  return (
-                    <button
-                      key={inst.id}
-                      className={`dhol-option-card ${isSelected ? 'selected-dhol' : ''} ${isThisPlaying ? 'playing-card' : ''}`}
-                      onClick={() => handleSelectDhol(inst)}
-                    >
-                      <div className="dhol-card-left">
-                        <span className="dhol-card-emoji">{inst.emoji}</span>
-                        <div className="dhol-card-text">
-                          <div className="dhol-card-name-row">
-                            <span className="dhol-card-name">{inst.nameHindi}</span>
-                            <span className="dhol-card-eng">({inst.name})</span>
-                          </div>
-                          <span className="dhol-card-tagline">{inst.tagline}</span>
-                        </div>
-                      </div>
-
-                      <div className="dhol-card-right">
-                        {isThisPlaying ? (
-                          <span className="dhol-playing-pill">
-                            चालू आहे ⏸️
-                          </span>
-                        ) : isSelected ? (
-                          <span className="dhol-paused-pill">
-                            थांबवले ▶️
-                          </span>
-                        ) : (
-                          <span className="dhol-bpm-pill">निवडा ▶</span>
-                        )}
-                      </div>
-                    </button>
-                  )
-                })}
-              </div>
-
-              {isDholPlaying ? (
-                <p className="dhol-menu-tip">
-                  💡 टीप: लूप थांबवण्यासाठी पर्यायावर पुन्हा दाबा किंवा बाहेरिल <strong>⏸</strong> बटण वापरा.
-                </p>
-              ) : activeDhol ? (
-                <p className="dhol-menu-tip">
-                  💡 टीप: निवडलेला ठेका सुरू करण्यासाठी पर्यायावर दाबा किंवा बाहेरिल <strong>▶</strong> बटण वापरा.
-                </p>
-              ) : null}
-            </div>
-          )}
         </div>
       </div>
     </div>

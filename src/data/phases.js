@@ -3,6 +3,15 @@
  */
 export const FESTIVAL_CATEGORIES = [
   {
+    id: 'dj',
+    name: 'Ganeshotsav DJ Songs',
+    subtitle: 'High-Energy DJ Remixes & Procession Beats',
+    description: 'Electrifying DJ beats, high-energy festival dance mixes, and thunderous procession bass.',
+    bgImage: `${import.meta.env.BASE_URL}Aagman Background.png`,
+    emoji: '🎧',
+    badge: 'DJ Remixes'
+  },
+  {
     id: 'marathi',
     name: 'Marathi Songs',
     subtitle: 'Iconic Marathi Devotional & Utsav Songs',
@@ -28,15 +37,6 @@ export const FESTIVAL_CATEGORIES = [
     bgImage: `${import.meta.env.BASE_URL}Aagman Background.png`,
     emoji: '🪔',
     badge: 'Maha Aarti'
-  },
-  {
-    id: 'dj',
-    name: 'Ganeshotsav DJ Songs',
-    subtitle: 'High-Energy DJ Remixes & Procession Beats',
-    description: 'Electrifying DJ beats, high-energy festival dance mixes, and thunderous procession bass.',
-    bgImage: `${import.meta.env.BASE_URL}Aagman Background.png`,
-    emoji: '🎧',
-    badge: 'DJ Remixes'
   }
 ]
 
