@@ -47,7 +47,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.5rem 1.5rem 1rem;
+  padding: max(1.2rem, env(safe-area-inset-top)) 1.5rem 1rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
@@ -63,14 +63,11 @@
   color: #fff;
   font-weight: 600;
   letter-spacing: 0.8px;
-  background: linear-gradient(90deg, #fff, #fdba74);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
 
 .drawer-subtitle {
-  font-family: var(--font-marathi-display);
-  font-size: 0.85rem;
+  font-family: var(--font-brand);
+  font-size: 0.82rem;
   color: var(--primary);
   font-weight: 500;
   letter-spacing: 0.3px;
@@ -307,12 +304,17 @@
 }
 
 .drawer-eq.playing span {
-  animation: eq-bounce 0.8s infinite alternate ease-in-out;
+  animation: drawer-eq-wave 0.8s infinite alternate cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .drawer-eq.playing span:nth-child(1) { animation-delay: 0.0s; }
 .drawer-eq.playing span:nth-child(2) { animation-delay: 0.2s; }
 .drawer-eq.playing span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes drawer-eq-wave {
+  0%   { height: 4px; }
+  100% { height: 18px; }
+}
 
 .track-text {
   min-width: 0;
@@ -320,7 +322,7 @@
 }
 
 .track-item-title {
-  font-family: var(--font-marathi-display);
+  font-family: var(--font-brand);
   font-size: 0.96rem;
   font-weight: 600;
   color: #fff;
@@ -866,9 +868,62 @@
 }
 
 /* ---- Responsive ---- */
-@media (max-width: 480px) {
+@media (max-width: 600px) {
   .drawer-container {
     width: 100vw;
     border-left: none;
+  }
+
+  .drawer-header {
+    padding: max(1rem, env(safe-area-inset-top)) 1.1rem 0.85rem;
+  }
+
+  .drawer-title {
+    font-size: 1.15rem;
+  }
+
+  .drawer-subtitle {
+    font-size: 0.78rem;
+  }
+
+  .close-btn {
+    width: 42px;
+    height: 42px;
+  }
+
+  .drawer-nav-tabs {
+    padding: 0.5rem 0.8rem;
+    gap: 0.35rem;
+  }
+
+  .tab-btn {
+    padding: 0.55rem 0.75rem;
+    font-size: 0.76rem;
+    min-height: 42px;
+  }
+
+  .track-item {
+    padding: 0.65rem 0.8rem;
+    min-height: 52px;
+  }
+
+  .track-item-title {
+    font-size: 0.86rem;
+  }
+
+  .track-item-artist {
+    font-size: 0.7rem;
+  }
+
+  .playlists-grid {
+    gap: 0.75rem;
+  }
+
+  .playlist-card {
+    padding: 0.95rem;
+  }
+
+  .drawer-footer {
+    padding: 1rem 1.2rem max(1.2rem, env(safe-area-inset-bottom));
   }
 }

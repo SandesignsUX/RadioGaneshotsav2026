@@ -342,16 +342,16 @@
 
 .equalizer.playing span {
   background: var(--primary);
-  animation: eq-bounce 0.9s infinite alternate ease-in-out;
+  animation: eq-wave 0.85s infinite alternate cubic-bezier(0.16, 1, 0.3, 1);
 }
 .equalizer.playing span:nth-child(1) { animation-delay: 0.0s; }
-.equalizer.playing span:nth-child(2) { animation-delay: 0.3s; }
-.equalizer.playing span:nth-child(3) { animation-delay: 0.15s; }
-.equalizer.playing span:nth-child(4) { animation-delay: 0.45s; }
+.equalizer.playing span:nth-child(2) { animation-delay: 0.28s; }
+.equalizer.playing span:nth-child(3) { animation-delay: 0.14s; }
+.equalizer.playing span:nth-child(4) { animation-delay: 0.42s; }
 
-@keyframes eq-bounce {
+@keyframes eq-wave {
   0%   { height: 4px; }
-  100% { height: 22px; }
+  100% { height: 20px; }
 }
 
 .track-details {
@@ -544,13 +544,13 @@
   transform: rotate(180deg);
 }
 
-/* ---- Upwards Opening Dropdown Menu (Anchored to Right) ---- */
+/* ---- Upwards Opening Dropdown Menu ---- */
 .dhol-upward-menu {
   position: absolute;
-  bottom: calc(100% + 14px);
-  right: 0;
-  width: 320px;
-  max-width: 90vw;
+  bottom: calc(100% + 10px);
+  left: clamp(16px, calc(50% - 360px), calc(100% - 360px));
+  width: 340px;
+  max-width: 92vw;
   background: rgba(18, 10, 4, 0.96);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
@@ -559,13 +559,13 @@
   padding: 1rem;
   box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.75), 0 0 25px rgba(249, 115, 22, 0.2);
   z-index: 120;
-  animation: upwardPopRight 0.28s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: upwardPop 0.24s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-@keyframes upwardPopRight {
+@keyframes upwardPop {
   from {
     opacity: 0;
-    transform: translateY(15px) scale(0.96);
+    transform: translateY(12px) scale(0.98);
   }
   to {
     opacity: 1;
@@ -723,12 +723,12 @@
 
 .dhol-option-card.playing-card {
   border-color: #f97316;
-  background: rgba(249, 115, 22, 0.16);
-  box-shadow: inset 3px 0 0 #f97316, 0 0 15px rgba(249, 115, 22, 0.2);
+  background: rgba(249, 115, 22, 0.18);
+  box-shadow: 0 4px 20px rgba(249, 115, 22, 0.25);
 }
 
 .dhol-playing-pill {
-  font-family: var(--font-marathi-body);
+  font-family: var(--font-brand);
   font-size: 0.72rem;
   font-weight: 700;
   color: #fff;
@@ -930,22 +930,26 @@
   left: 0;
   right: 0;
   width: 100%;
-  height: 4px;
+  height: 5px;
   background: rgba(255, 255, 255, 0.12);
   cursor: pointer;
   z-index: 5;
-  transition: height 0.2s ease;
 }
 
-.progress-container:hover {
-  height: 6px;
+/* Expanded touch hit area for mobile thumb scrubbing */
+.progress-container::before {
+  content: '';
+  position: absolute;
+  top: -14px;
+  bottom: -8px;
+  left: 0;
+  right: 0;
 }
 
 .progress-fill {
   height: 100%;
   background: linear-gradient(90deg, var(--primary), #fb923c);
   box-shadow: 0 0 8px rgba(249, 115, 22, 0.7);
-  transition: width 0.1s linear;
   position: relative;
 }
 
@@ -982,9 +986,10 @@
     max-width: 98vw;
     scrollbar-width: none;
     -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
     justify-content: flex-start;
-    padding: 0.2rem 0.35rem;
-    gap: 0.4rem;
+    padding: 0.2rem 0.4rem;
+    gap: 0.45rem;
   }
   .player-categories-wrapper::-webkit-scrollbar {
     display: none;
@@ -995,33 +1000,34 @@
   }
 
   .dhol-panel {
-    padding: 0.28rem 0.4rem 0.28rem 0.65rem;
-    border-radius: 24px;
-    gap: 0.25rem;
+    padding: 0.32rem 0.5rem 0.32rem 0.75rem;
+    border-radius: 26px;
+    gap: 0.32rem;
   }
 
   .dhol-panel-label-btn {
-    font-size: 0.76rem;
-    gap: 0.25rem;
-    padding: 0.15rem 0.1rem;
+    font-size: 0.78rem;
+    gap: 0.28rem;
+    padding: 0.2rem 0.1rem;
+    min-height: 36px;
   }
 
   .dhol-trigger-emoji {
-    font-size: 0.88rem;
+    font-size: 0.9rem;
   }
 
   .dhol-panel-play-btn {
-    width: 25px;
-    height: 25px;
+    width: 28px;
+    height: 28px;
   }
 
   .dhol-panel-chevron-btn {
-    padding: 0.15rem;
+    padding: 0.2rem;
   }
 
   /* Dock Row & Glass Player on Mobile */
   .player-dock-row {
-    gap: 0.4rem;
+    gap: 0.45rem;
     width: 100%;
   }
 
@@ -1031,14 +1037,14 @@
   }
 
   .search-trigger-btn {
-    width: 38px;
-    height: 38px;
+    width: 42px;
+    height: 42px;
   }
 
   .player-glass {
-    padding: 0.65rem 0.75rem 0.85rem;
+    padding: 0.65rem 0.85rem max(0.85rem, env(safe-area-inset-bottom));
     gap: 0.45rem;
-    border-radius: 16px 16px 0 0;
+    border-radius: 18px 18px 0 0;
   }
 
   .player-info {
@@ -1076,13 +1082,13 @@
   }
 
   .control-btn {
-    width: 30px;
-    height: 30px;
+    width: 32px;
+    height: 32px;
   }
 
   .play-btn {
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
   }
 
   /* On Mobile: Hide only volume slider & long time display, keep Queue and Minimize buttons! */
@@ -1103,64 +1109,72 @@
 
   .util-action-btn,
   .minimize-btn {
-    width: 30px;
-    height: 30px;
+    width: 34px;
+    height: 34px;
   }
 
-  /* Floating upward menus centered and fully within mobile viewport */
+  /* Floating upward menus centered via left:0, right:0 and margin-inline:auto so translateY animations never break centering */
   .search-popover-menu {
     position: fixed;
-    bottom: 72px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: min(340px, 94vw);
-    max-width: 94vw;
+    bottom: max(72px, calc(72px + env(safe-area-inset-bottom)));
+    left: 0;
+    right: 0;
+    margin-inline: auto;
+    width: min(350px, calc(100vw - 24px));
+    max-width: calc(100vw - 24px);
+    max-height: 70vh;
+    border-radius: 20px;
+    box-shadow: 0 -10px 45px rgba(0, 0, 0, 0.85);
     z-index: 150;
   }
 
   .dhol-upward-menu {
     position: fixed;
-    bottom: 120px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: min(340px, 94vw);
-    max-width: 94vw;
+    bottom: max(115px, calc(115px + env(safe-area-inset-bottom)));
+    left: 0;
+    right: 0;
+    margin-inline: auto;
+    width: min(350px, calc(100vw - 24px));
+    max-width: calc(100vw - 24px);
+    max-height: 70vh;
+    border-radius: 20px;
+    box-shadow: 0 -10px 45px rgba(0, 0, 0, 0.85);
     z-index: 150;
   }
 }
 
 @media (max-width: 420px) {
   .player-glass {
-    padding: 0.55rem 0.6rem 0.75rem;
+    padding: 0.55rem 0.65rem max(0.75rem, env(safe-area-inset-bottom));
     gap: 0.35rem;
   }
 
   .track-title {
-    font-size: 0.76rem;
+    font-size: 0.78rem;
   }
 
   .track-artist {
-    font-size: 0.62rem;
+    font-size: 0.64rem;
   }
 
   .play-btn {
-    width: 36px;
-    height: 36px;
+    width: 40px;
+    height: 40px;
   }
 
   .control-btn {
-    width: 26px;
-    height: 26px;
+    width: 28px;
+    height: 28px;
   }
 
   .search-trigger-btn {
-    width: 34px;
-    height: 34px;
+    width: 38px;
+    height: 38px;
   }
 
   .util-action-btn,
   .minimize-btn {
-    width: 26px;
-    height: 26px;
+    width: 30px;
+    height: 30px;
   }
 }
