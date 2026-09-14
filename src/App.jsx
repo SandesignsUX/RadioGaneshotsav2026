@@ -112,6 +112,20 @@ function App() {
           zIndex: -10
         }}
       />
+      {/* YouTube IFrame API target for Dhol Audio — always in the DOM */}
+      <div
+        ref={dholAudio.ytContainerRef}
+        style={{
+          position: 'fixed',
+          bottom: 0,
+          left: 200,
+          width: 200,
+          height: 200,
+          opacity: 0.01,
+          pointerEvents: 'none',
+          zIndex: -10
+        }}
+      />
 
       {!hasEntered
         ? (

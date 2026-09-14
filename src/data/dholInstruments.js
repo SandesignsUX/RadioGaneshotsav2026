@@ -21,16 +21,7 @@ export const DHOL_INSTRUMENTS = [
     description: 'High-energy dance beats and syncopated rhythmic rolls popular in festive processions.',
     bpm: 148,
     accent: '#ef4444'
-  },
-  {
-    id: 'kaavdi',
-    name: 'Kaavdi',
-    nameHindi: 'Kaavdi Brass Cymbals',
-    tagline: 'Resonant Brass Cymbals & Tasha',
-    emoji: '🔔',
-    description: 'Vibrant brass cymbal clashes interwoven with fast marching tasha rhythms.',
-    bpm: 142,
-    accent: '#eab308'
+
   },
   {
     id: 'halgi',

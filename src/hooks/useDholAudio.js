@@ -16,6 +16,9 @@ export function useDholAudio() {
   const activeDholRef = useRef(null)
   const volumeRef = useRef(0.8)
 
+  const ytContainerRef = useRef(null)
+  const ytPlayerRef = useRef(null)
+
   useEffect(() => {
     activeDholRef.current = activeDhol
   }, [activeDhol])
@@ -33,6 +36,51 @@ export function useDholAudio() {
       audioCtxRef.current.resume()
     }
     return audioCtxRef.current
+  }, [])
+
+  // Initialize YT player for Nashik Dhol
+  useEffect(() => {
+    const initYT = () => {
+      if (ytPlayerRef.current || !ytContainerRef.current || !window.YT?.Player) return
+
+      const el = document.createElement('div')
+      ytContainerRef.current.appendChild(el)
+
+      ytPlayerRef.current = new window.YT.Player(el, {
+        height: '200',
+        width: '200',
+        videoId: '',
+        playerVars: {
+          autoplay: 0,
+          controls: 0,
+          disablekb: 1,
+          fs: 0,
+          iv_load_policy: 3,
+          modestbranding: 1,
+          rel: 0,
+          playsinline: 1,
+        },
+        events: {
+          onStateChange: (event) => {
+            const YT = window.YT
+            if (event.data === YT?.PlayerState?.ENDED) {
+              ytPlayerRef.current.seekTo(0)
+              ytPlayerRef.current.playVideo()
+            }
+          }
+        }
+      })
+    }
+
+    if (window.YT && window.YT.Player) {
+      initYT()
+    } else {
+      const originalOnReady = window.onYouTubeIframeAPIReady
+      window.onYouTubeIframeAPIReady = () => {
+        if (originalOnReady) originalOnReady()
+        initYT()
+      }
+    }
   }, [])
 
   // --- Sound Synthesizers ---
@@ -124,35 +172,6 @@ export function useDholAudio() {
     ring.stop(time + 0.05)
   }, [])
 
-  // 3. Brass Cymbals / Zanj (झांज) for Kaavdi
-  const triggerZanj = useCallback((ctx, time, intensity = 0.7) => {
-    const masterVol = volumeRef.current * intensity
-
-    // Inharmonic metallic cluster
-    const freqs = [587, 845, 1200, 1680, 2400, 3100]
-    freqs.forEach((freq) => {
-      const osc = ctx.createOscillator()
-      const gain = ctx.createGain()
-      const filter = ctx.createBiquadFilter()
-
-      osc.type = 'square'
-      osc.frequency.setValueAtTime(freq + (Math.random() * 20 - 10), time)
-
-      filter.type = 'highpass'
-      filter.frequency.setValueAtTime(3500, time)
-
-      gain.gain.setValueAtTime(masterVol * 0.18, time)
-      gain.gain.exponentialRampToValueAtTime(0.001, time + 0.22)
-
-      osc.connect(filter)
-      filter.connect(gain)
-      gain.connect(ctx.destination)
-
-      osc.start(time)
-      osc.stop(time + 0.24)
-    })
-  }, [])
-
   // 4. Snappy Halgi (हलगी / संबळ)
   const triggerHalgi = useCallback((ctx, time, intensity = 0.85) => {
     const masterVol = volumeRef.current * intensity
@@ -186,54 +205,21 @@ export function useDholAudio() {
     const time = ctx.currentTime + 0.01
 
     if (dholId === 'puneri') {
-      // 16-step Puneri Mahanaad Pattern (BPM ~ 136)
-      // Dhol on: 0, 3, 6, 8, 11, 14
-      // Tasha on rapid cadence: 0, 1, 2, 4, 6, 8, 9, 10, 12, 14, 15
-      if ([0, 3, 6, 8, 11, 14].includes(step % 16)) {
-        triggerDhol(ctx, time, step === 0 || step === 8 ? 1.3 : 1.0)
-      }
-      if ([0, 1, 2, 4, 6, 8, 9, 10, 12, 14, 15].includes(step % 16)) {
-        triggerTasha(ctx, time, [0, 8].includes(step % 16) ? 0.9 : 0.6)
-      }
+      // Handled by YouTube player
     } else if (dholId === 'nashik') {
-      // Fast 16-step Nashik Dhol Dance Beat (BPM ~ 148)
-      // Fast syncopated thumping
-      if ([0, 2, 4, 6, 8, 10, 12, 13, 14].includes(step % 16)) {
-        triggerDhol(ctx, time, [0, 8].includes(step % 16) ? 1.2 : 0.8)
-      }
-      if ([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].includes(step % 16)) {
-        triggerTasha(ctx, time, step % 2 === 0 ? 0.8 : 0.45)
-      }
-    } else if (dholId === 'kaavdi') {
-      // Kaavdi Zanj + Marching Tasha (BPM ~ 142)
-      if ([0, 4, 8, 12].includes(step % 16)) {
-        triggerDhol(ctx, time, 1.1)
-        triggerZanj(ctx, time, 0.8)
-      }
-      if ([2, 6, 10, 14].includes(step % 16)) {
-        triggerZanj(ctx, time, 0.9)
-      }
-      if ([0, 1, 2, 4, 5, 6, 8, 9, 10, 12, 13, 14].includes(step % 16)) {
-        triggerTasha(ctx, time, 0.7)
-      }
+      // Handled by YouTube player
     } else if (dholId === 'halgi') {
-      // Halgi & Sambal snapping rhythm (BPM ~ 156)
-      if ([0, 4, 8, 12].includes(step % 16)) {
-        triggerDhol(ctx, time, 0.9)
-      }
-      if ([0, 2, 3, 5, 6, 8, 10, 11, 13, 14].includes(step % 16)) {
-        triggerHalgi(ctx, time, [0, 6, 8, 14].includes(step % 16) ? 1.0 : 0.7)
-      }
-      if (step % 2 === 1) {
-        triggerTasha(ctx, time, 0.4)
-      }
+      // Handled by YouTube player
     }
-  }, [getAudioContext, triggerDhol, triggerTasha, triggerZanj, triggerHalgi])
+  }, [getAudioContext, triggerDhol, triggerTasha, triggerHalgi])
 
   const pauseDhol = useCallback(() => {
     if (timerRef.current) {
       clearInterval(timerRef.current)
       timerRef.current = null
+    }
+    if (ytPlayerRef.current?.pauseVideo) {
+      ytPlayerRef.current.pauseVideo()
     }
     setIsDholPlaying(false)
     stepRef.current = 0
@@ -244,6 +230,9 @@ export function useDholAudio() {
       clearInterval(timerRef.current)
       timerRef.current = null
     }
+    if (ytPlayerRef.current?.pauseVideo) {
+      ytPlayerRef.current.pauseVideo()
+    }
     setIsDholPlaying(false)
     stepRef.current = 0
   }, [])
@@ -253,10 +242,27 @@ export function useDholAudio() {
       clearInterval(timerRef.current)
       timerRef.current = null
     }
+    if (ytPlayerRef.current?.pauseVideo) {
+      ytPlayerRef.current.pauseVideo()
+    }
 
     const inst = dholInstrument || activeDholRef.current || DHOL_INSTRUMENTS[0]
     setActiveDhol(inst)
     setIsDholPlaying(true)
+
+    const dholVideos = {
+      nashik: '41BqL-H2Wr4',
+      puneri: '8K8C3oXfB88',
+      halgi: 'mrAxfhVu6lY'
+    }
+
+    if (dholVideos[inst.id]) {
+      if (ytPlayerRef.current?.loadVideoById) {
+        ytPlayerRef.current.loadVideoById(dholVideos[inst.id])
+        ytPlayerRef.current.setVolume(volumeRef.current * 100)
+      }
+      return
+    }
 
     // Calculate step interval based on instrument BPM (16th notes)
     const bpm = inst.bpm || 140
@@ -291,6 +297,13 @@ export function useDholAudio() {
     }
   }, [])
 
+  // Listen to volume changes for Nashik Dhol
+  useEffect(() => {
+    if (ytPlayerRef.current?.setVolume) {
+      ytPlayerRef.current.setVolume(volume * 100)
+    }
+  }, [volume])
+
   return {
     activeDhol,
     isDholPlaying,
@@ -298,6 +311,7 @@ export function useDholAudio() {
     pauseDhol,
     stopDhol,
     toggleDhol,
-    setDholVolume: setVolume
+    setDholVolume: setVolume,
+    ytContainerRef
   }
 }
