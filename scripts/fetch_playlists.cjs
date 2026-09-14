@@ -88,43 +88,87 @@ export const DJ_PLAYLIST_URL = 'https://www.youtube.com/playlist?list=PLAKktpXJb
   }
 
   fileContent += `
-export const PLAYLISTS = [
-  {
-    id: 'marathi',
-    name: 'Marathi Bhakti',
-    tagline: 'Devotional Abhangs & Phatkas',
-    emoji: '🌸',
-    color: 'from-orange-500 to-rose-600',
-    tracks: MARATHI_TRACKS
-  },
-  {
-    id: 'hindi',
-    name: 'Hindi Bhajans',
-    tagline: 'Soulful Ganpati Vandanas',
-    emoji: '🌺',
-    color: 'from-rose-500 to-pink-600',
-    tracks: HINDI_TRACKS
-  },
-  {
-    id: 'aarti',
-    name: 'Aarti Sangrah',
-    tagline: 'Traditional Evening Aartis',
-    emoji: '🪔',
-    color: 'from-amber-500 to-orange-500',
-    tracks: AARTI_TRACKS
-  },
-  {
-    id: 'dj',
-    name: 'Visarjan DJ',
-    tagline: 'High Energy Miravnuk Beats',
-    emoji: '🎧',
-    color: 'from-fuchsia-600 to-purple-600',
-    tracks: DJ_TRACKS
-  }
-]
+export const MARATHI_PLAYLIST = {
+  id: 'marathi',
+  name: 'Marathi Bhakti',
+  nameHindi: 'मराठी भक्ती गीते',
+  subtitle: 'Classic Devotional Abhangs & Phatkas',
+  subtitleHindi: 'पारंपरिक अभंग व फटके',
+  emoji: '🌸',
+  description: 'Soulful Marathi Ganpati devotional songs, authentic abhangs, and classic phatkas.',
+  timeRange: '29 Songs · Marathi Devotional',
+  youtubePlaylistId: MARATHI_PLAYLIST_ID,
+  url: MARATHI_PLAYLIST_URL,
+  tracks: MARATHI_TRACKS
+}
 
-export const getPlaylistById = (id) => PLAYLISTS.find((p) => p.id === id)
-export const getAllTracks = () => PLAYLISTS.flatMap((p) => p.tracks)
+export const HINDI_PLAYLIST = {
+  id: 'hindi',
+  name: 'Hindi Bhajans',
+  nameHindi: 'हिंदी भजने',
+  subtitle: 'Soulful Bollywood & Hindi Vandanas',
+  subtitleHindi: 'बॉलिवूड आणि हिंदी वंदना',
+  emoji: '🌺',
+  description: 'Devotional Bollywood hits and soothing Hindi bhajans for Ganeshotsav.',
+  timeRange: '16 Songs · Hindi Devotional',
+  youtubePlaylistId: HINDI_PLAYLIST_ID,
+  url: HINDI_PLAYLIST_URL,
+  tracks: HINDI_TRACKS
+}
+
+export const AARTI_PLAYLIST = {
+  id: 'aarti',
+  name: 'Ganpati Aarti',
+  nameHindi: 'गणपती आरती',
+  subtitle: 'Traditional Aartis & Stutis',
+  subtitleHindi: 'सुखकर्ता दुःखहर्ता व महा आरती संग्रह',
+  emoji: '🪔',
+  description: 'Divine morning and evening Aartis, Sukh Karta Dukh Harta, Shej Aarti, and sacred chants.',
+  timeRange: '8 Songs · Traditional Aarti',
+  youtubePlaylistId: AARTI_PLAYLIST_ID,
+  url: AARTI_PLAYLIST_URL,
+  tracks: AARTI_TRACKS
+}
+
+export const DJ_PLAYLIST = {
+  id: 'dj',
+  name: 'Ganeshotsav DJ Songs',
+  nameHindi: 'गणेशोत्सव डीजे गाणी',
+  subtitle: 'High-Energy DJ Remixes & Procession Beats',
+  subtitleHindi: 'धमाल डीजे रिमिक्स व मिरवणूक ठेका',
+  emoji: '🎧',
+  description: 'Electrifying DJ beats, high-energy festival dance mixes, and thunderous procession bass.',
+  timeRange: '19 Songs · Festival DJ Remixes',
+  youtubePlaylistId: DJ_PLAYLIST_ID,
+  url: DJ_PLAYLIST_URL,
+  tracks: DJ_TRACKS
+}
+
+export const PLAYLISTS = {
+  marathi: MARATHI_PLAYLIST,
+  hindi: HINDI_PLAYLIST,
+  aarti: AARTI_PLAYLIST,
+  dj: DJ_PLAYLIST
+}
+
+export const GANESHOTSAV_TRACKS = MARATHI_TRACKS
+export const YOUTUBE_PLAYLIST_ID = MARATHI_PLAYLIST_ID
+export const YOUTUBE_PLAYLIST_URL = MARATHI_PLAYLIST_URL
+export const MAIN_PLAYLIST = MARATHI_PLAYLIST
+
+export function getAllPlaylists() {
+  return [DJ_PLAYLIST, MARATHI_PLAYLIST, HINDI_PLAYLIST, AARTI_PLAYLIST]
+}
+
+export function getPlaylistById(id) {
+  if (!id) return MARATHI_PLAYLIST
+  const key = id.toLowerCase()
+  return PLAYLISTS[key] || MARATHI_PLAYLIST
+}
+
+export function getCurrentPlaylist(categoryKey = 'marathi') {
+  return getPlaylistById(categoryKey)
+}
 `;
 
   const outPath = path.join(__dirname, '../src/data/playlists.js');
