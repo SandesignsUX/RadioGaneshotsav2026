@@ -47,7 +47,7 @@ export const FESTIVAL_PHASES = FESTIVAL_CATEGORIES
  * Returns default initial category
  */
 export function getDefaultPhase() {
-  return FESTIVAL_CATEGORIES[0]
+  return FESTIVAL_CATEGORIES.find(c => c.id === 'marathi') || FESTIVAL_CATEGORIES[0]
 }
 
 /**
